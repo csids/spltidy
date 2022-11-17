@@ -37,7 +37,7 @@ Creates the pre-specified unified columns for some data formats.
 }
 
 For more details see the vignette:
-\code{vignette("splfmt_rts_data_v1", package = "spltidy")}
+\code{vignette("splfmt_rts_data_v1", package = "cstidy")}
 }
 
 \seealso{
