@@ -25,7 +25,7 @@ An extended \code{data.table}, which has been modified by reference and returned
 }
 \details{
 For more details see the vignette:
-\code{vignette("splfmt_rts_data_v1", package = "spltidy")}
+\code{vignette("splfmt_rts_data_v1", package = "cstidy")}
 }
 \section{Smart assignment}{
 
@@ -104,11 +104,11 @@ When the \strong{variables in bold} are assigned using \verb{:=}, the listed var
 
 \examples{
 # Create some fake data as data.table
-d <- spltidy::generate_test_data(fmt = "splfmt_rts_data_v1")
+d <- cstidy::generate_test_data(fmt = "splfmt_rts_data_v1")
 d <- d[1:5]
 
 # convert to splfmt_rts_data_v1 by reference
-spltidy::set_splfmt_rts_data_v1(d, create_unified_columns = TRUE)
+cstidy::set_splfmt_rts_data_v1(d, create_unified_columns = TRUE)
 
 #
 d[1, isoyearweek := "2021-01"]
@@ -123,13 +123,13 @@ d[5, c("location_code") := .("norge")]
 d
 
 # Investigating the data structure of one column inside a dataset
-spltidy::generate_test_data() \%>\%
-  spltidy::set_splfmt_rts_data_v1() \%>\%
-  spltidy::identify_data_structure("deaths_n") \%>\%
+cstidy::generate_test_data() \%>\%
+  cstidy::set_splfmt_rts_data_v1() \%>\%
+  cstidy::identify_data_structure("deaths_n") \%>\%
   plot()
 # Investigating the data structure via summary
-spltidy::generate_test_data() \%>\%
-  spltidy::set_splfmt_rts_data_v1() \%>\%
+cstidy::generate_test_data() \%>\%
+  cstidy::set_splfmt_rts_data_v1() \%>\%
   summary()
 }
 \seealso{

@@ -17,9 +17,9 @@ identify_data_structure(x, col, ...)
 Reduces the data structure of a column inside a dataset into something that describes
 }
 \examples{
-spltidy::generate_test_data() \%>\%
-  spltidy::set_splfmt_rts_data_v1() \%>\%
-  spltidy::identify_data_structure("deaths_n") \%>\%
+cstidy::generate_test_data() \%>\%
+  cstidy::set_splfmt_rts_data_v1() \%>\%
+  cstidy::identify_data_structure("deaths_n") \%>\%
   plot()
 }
 \seealso{

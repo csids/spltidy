@@ -13,5 +13,5 @@ generate_test_data(fmt = "splfmt_rts_data_v1")
 Generates some test data
 }
 \examples{
-spltidy::generate_test_data("splfmt_rts_data_v1")
+cstidy::generate_test_data("splfmt_rts_data_v1")
 }

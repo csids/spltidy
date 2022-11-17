@@ -13,10 +13,10 @@ remove_class_splfmt_rts_data(x)
 Remove class splfmt_rts_data_*
 }
 \examples{
-x <- spltidy::generate_test_data() \%>\%
-  spltidy::set_splfmt_rts_data_v1()
+x <- cstidy::generate_test_data() \%>\%
+  cstidy::set_splfmt_rts_data_v1()
 class(x)
-spltidy::remove_class_splfmt_rts_data(x)
+cstidy::remove_class_splfmt_rts_data(x)
 class(x)
 }
 \seealso{

@@ -15,5 +15,5 @@
 Epicurve
 }
 \examples{
-splstyle::plot_epicurve(spltidy::norway_covid19_cases_by_time_location[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
+splstyle::plot_epicurve(cstidy::norway_covid19_cases_by_time_location[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
 }

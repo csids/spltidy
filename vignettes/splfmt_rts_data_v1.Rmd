@@ -760,8 +760,8 @@ An example relating to vaccination:
 ## In action
 
 ```{r}
-d <- spltidy::generate_test_data()[1:5]
-spltidy::set_splfmt_rts_data_v1(d)
+d <- cstidy::generate_test_data()[1:5]
+cstidy::set_splfmt_rts_data_v1(d)
 
 # Looking at the dataset
 d[]
@@ -789,7 +789,7 @@ d
 # Collapsing down to different levels, and healing the dataset
 # (so that it can be worked on further with regards to real time surveillance)
 d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_time)] %>%
-  spltidy::create_unified_columns() %>%
+  cstidy::create_unified_columns() %>%
   print()
 
 # Collapsing down to different levels, without healing the dataset and without
@@ -800,7 +800,7 @@ d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_
 # Collapsing to different levels, and removing the class splfmt_rts_data_v1 because
 # it is going to be used in new output/analyses
 d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_time)] %>%
-  spltidy::remove_class_splfmt_rts_data() %>%
+  cstidy::remove_class_splfmt_rts_data() %>%
   print()
 ```
 
@@ -809,10 +809,10 @@ d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_
 Sometimes you need to expand the number of rows in a dataset to a future time.
 
 ```{r}
-spltidy::generate_test_data() %>%
-  spltidy::set_splfmt_rts_data_v1() %>%
+cstidy::generate_test_data() %>%
+  cstidy::set_splfmt_rts_data_v1() %>%
   dplyr::filter(location_code == "county03") %>%
-  spltidy::expand_time_to(max_isoyearweek = "2022-08") %>%
+  cstidy::expand_time_to(max_isoyearweek = "2022-08") %>%
   print()
 ```
 
@@ -821,9 +821,9 @@ spltidy::generate_test_data() %>%
 We might also need to identify how many time series are in one dataset.
 
 ```{r}
-spltidy::generate_test_data() %>%
-  spltidy::set_splfmt_rts_data_v1() %>%
-  spltidy::unique_time_series()
+cstidy::generate_test_data() %>%
+  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::unique_time_series()
 ```
 
 ## Summary
@@ -831,8 +831,8 @@ spltidy::generate_test_data() %>%
 We need a way to easily summarize the data structure of a dataset.
 
 ```{r}
-spltidy::generate_test_data() %>%
-  spltidy::set_splfmt_rts_data_v1() %>%
+cstidy::generate_test_data() %>%
+  cstidy::set_splfmt_rts_data_v1() %>%
   summary()
 ```
 
@@ -841,9 +841,9 @@ spltidy::generate_test_data() %>%
 We need a way to easily summarize the data structure of one column inside a dataset.
 
 ```{r}
-spltidy::generate_test_data() %>%
-  spltidy::set_splfmt_rts_data_v1() %>%
-  spltidy::identify_data_structure("deaths_n") %>%
+cstidy::generate_test_data() %>%
+  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::identify_data_structure("deaths_n") %>%
   plot()
 ```
 
