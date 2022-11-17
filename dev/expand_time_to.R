@@ -7,8 +7,8 @@ d %>%
 
 
 max_isoyearweek = "2022-05"
-d <- spltidy::generate_test_data() |>
-  spltidy::set_splfmt_rts_data_v1()
+d <- cstidy::generate_test_data() |>
+  cstidy::set_splfmt_rts_data_v1()
 
 ids <- unique_time_series(d, set_time_series_id = TRUE)
 
@@ -31,15 +31,15 @@ for(i in seq_along(retval)){
 retval <- rbindlist(retval)
 
 x <- rbindlist(list(d, retval), fill = T)
-spltidy::set_splfmt_rts_data_v1(x)
+cstidy::set_splfmt_rts_data_v1(x)
 setorder(x, time_series_id, date)
 
 
 
 
 
-d <- spltidy::generate_test_data() |>
-  spltidy::set_splfmt_rts_data_v1()
+d <- cstidy::generate_test_data() |>
+  cstidy::set_splfmt_rts_data_v1()
 d <- d[1:3]
 d
 d[1, granularity_time := "day"]

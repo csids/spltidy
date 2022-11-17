@@ -16,9 +16,9 @@ save_spl.default  <- function(x, filepath, nthreads = 1, public_key_path = Sys.g
   }
 
   if(is.null(public_key_path)){
-    public_key_path <- system.file("splsave/id_rsa.pub", package="spltidy")
+    public_key_path <- system.file("splsave/id_rsa.pub", package="cstidy")
   } else if(public_key_path==""){
-    public_key_path <- system.file("splsave/id_rsa.pub", package="spltidy")
+    public_key_path <- system.file("splsave/id_rsa.pub", package="cstidy")
   }
 
   if(stringr::str_detect(filepath, ".spl$")){

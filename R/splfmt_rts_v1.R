@@ -117,10 +117,10 @@ formats$splfmt_rts_data_v1$unified$date <- list(
 #' Remove class splfmt_rts_data_*
 #' @param x data.table
 #' @examples
-#' x <- spltidy::generate_test_data() %>%
-#'   spltidy::set_splfmt_rts_data_v1()
+#' x <- cstidy::generate_test_data() %>%
+#'   cstidy::set_splfmt_rts_data_v1()
 #' class(x)
-#' spltidy::remove_class_splfmt_rts_data(x)
+#' cstidy::remove_class_splfmt_rts_data(x)
 #' class(x)
 #' @family splfmt_rts_data
 #' @export
@@ -139,7 +139,7 @@ remove_class_splfmt_rts_data <- function(x) {
 #'
 #' @param fmt Data format (\code{splfmt_rts_data_v1})
 #' @examples
-#' spltidy::generate_test_data("splfmt_rts_data_v1")
+#' cstidy::generate_test_data("splfmt_rts_data_v1")
 #' @export
 generate_test_data <- function(fmt = "splfmt_rts_data_v1") {
   stopifnot(fmt %in% c("splfmt_rts_data_v1"))
@@ -720,7 +720,7 @@ heal.splfmt_rts_data_v1 <- function(x, ...) {
 #' - date
 #'
 #' For more details see the vignette:
-#' \code{vignette("splfmt_rts_data_v1", package = "spltidy")}
+#' \code{vignette("splfmt_rts_data_v1", package = "cstidy")}
 #'
 #' @param x An object of type \code{\link{splfmt_rts_data_v1}}
 #' @param ... Arguments passed to or from other methods
@@ -850,7 +850,7 @@ assert_classes.splfmt_rts_data_v1 <- function(x) {
 #'
 #' @details
 #' For more details see the vignette:
-#' \code{vignette("splfmt_rts_data_v1", package = "spltidy")}
+#' \code{vignette("splfmt_rts_data_v1", package = "cstidy")}
 #'
 #' @return An extended \code{data.table}, which has been modified by reference and returned (invisibly).
 #'
@@ -859,11 +859,11 @@ assert_classes.splfmt_rts_data_v1 <- function(x) {
 #' @param heal Do you want to \code{\link{heal}} on creation?
 #' @examples
 #' # Create some fake data as data.table
-#' d <- spltidy::generate_test_data(fmt = "splfmt_rts_data_v1")
+#' d <- cstidy::generate_test_data(fmt = "splfmt_rts_data_v1")
 #' d <- d[1:5]
 #'
 #' # convert to splfmt_rts_data_v1 by reference
-#' spltidy::set_splfmt_rts_data_v1(d, create_unified_columns = TRUE)
+#' cstidy::set_splfmt_rts_data_v1(d, create_unified_columns = TRUE)
 #'
 #' #
 #' d[1, isoyearweek := "2021-01"]
@@ -878,13 +878,13 @@ assert_classes.splfmt_rts_data_v1 <- function(x) {
 #' d
 #'
 #' # Investigating the data structure of one column inside a dataset
-#' spltidy::generate_test_data() %>%
-#'   spltidy::set_splfmt_rts_data_v1() %>%
-#'   spltidy::identify_data_structure("deaths_n") %>%
+#' cstidy::generate_test_data() %>%
+#'   cstidy::set_splfmt_rts_data_v1() %>%
+#'   cstidy::identify_data_structure("deaths_n") %>%
 #'   plot()
 #' # Investigating the data structure via summary
-#' spltidy::generate_test_data() %>%
-#'   spltidy::set_splfmt_rts_data_v1() %>%
+#' cstidy::generate_test_data() %>%
+#'   cstidy::set_splfmt_rts_data_v1() %>%
 #'   summary()
 #' @family splfmt_rts_data
 #' @export
@@ -1057,9 +1057,9 @@ summary.splfmt_rts_data_v1 <- function(object, ...) {
 #' @param col Column name to hash
 #' @param ... Arguments passed to or from other methods
 #' @examples
-#' spltidy::generate_test_data() %>%
-#'   spltidy::set_splfmt_rts_data_v1() %>%
-#'   spltidy::identify_data_structure("deaths_n") %>%
+#' cstidy::generate_test_data() %>%
+#'   cstidy::set_splfmt_rts_data_v1() %>%
+#'   cstidy::identify_data_structure("deaths_n") %>%
 #'   plot()
 #' @family splfmt_rts_data
 #' @export
@@ -1437,7 +1437,7 @@ expand_time_to_max_isoyear.splfmt_rts_data_v1 <- function(x, max_isoyear = NULL,
   retval <- rbindlist(retval)
 
   x <- rbindlist(list(d, retval), fill = T)
-  spltidy::set_splfmt_rts_data_v1(x)
+  cstidy::set_splfmt_rts_data_v1(x)
   setorder(x, time_series_id, date)
 
   if(flag_to_remove_time_series_id) x[, time_series_id := NULL]
@@ -1485,7 +1485,7 @@ expand_time_to_max_isoyearweek.splfmt_rts_data_v1 <- function(x, max_isoyearweek
   retval <- rbindlist(retval)
 
   x <- rbindlist(list(d, retval), fill = T)
-  spltidy::set_splfmt_rts_data_v1(x)
+  cstidy::set_splfmt_rts_data_v1(x)
   setorder(x, time_series_id, date)
 
   if(flag_to_remove_time_series_id) x[, time_series_id := NULL]
@@ -1531,7 +1531,7 @@ expand_time_to_max_date.splfmt_rts_data_v1 <- function(x, max_date = NULL, ...) 
   retval <- rbindlist(retval)
 
   x <- rbindlist(list(d, retval), fill = T)
-  spltidy::set_splfmt_rts_data_v1(x)
+  cstidy::set_splfmt_rts_data_v1(x)
   setorder(x, time_series_id, date)
 
   if(flag_to_remove_time_series_id) x[, time_series_id := NULL]
@@ -1551,7 +1551,7 @@ expand_time_to_max_date.splfmt_rts_data_v1 <- function(x, max_date = NULL, ...) 
 #' @param x Dataset
 #' @param ... X
 #' @examples
-#' splstyle::plot_epicurve(spltidy::norway_covid19_cases_by_time_location[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
+#' splstyle::plot_epicurve(cstidy::norway_covid19_cases_by_time_location[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
 #' @importFrom splstyle plot_epicurve
 #' @method plot_epicurve splfmt_rts_data_v1
 #' @export

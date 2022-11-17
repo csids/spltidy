@@ -2,17 +2,17 @@
 #' @importFrom magrittr %>%
 .onAttach <- function(libname, pkgname) {
   version <- tryCatch(
-    utils::packageDescription("spltidy", fields = "Version"),
+    utils::packageDescription("cstidy", fields = "Version"),
     warning = function(w) {
       1
     }
   )
 
   packageStartupMessage(paste0(
-    "spltidy ",
+    "cstidy ",
     version,
     "\n",
-    "https://docs.sykdomspulsen.no/spltidy"
+    "https://www.csids.no/cstidy/"
   ))
 }
 

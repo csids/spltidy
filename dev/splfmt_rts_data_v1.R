@@ -67,7 +67,7 @@ conn <- DBI::dbConnect(
 
 sc::use_db(conn, Sys.getenv("SYKDOMSPULSEN_DB_CONFIG_DB_ANON"))
 
-conn %>% dplyr::tbl("anon_weather_rawdata") |> spltidy::identify_data_structure("temperature_min_n") |> plot()
+conn %>% dplyr::tbl("anon_weather_rawdata") |> cstidy::identify_data_structure("temperature_min_n") |> plot()
 
 conn %>% dplyr::tbl("anon_weather_rawdata") |> class()
 

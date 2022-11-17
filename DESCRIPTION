@@ -1,15 +1,14 @@
-Package: spltidy
+Package: cstidy
 Title: Helpful functions for cleaning data
 Version: 2020.5.25
 Authors@R: c(
-  person(c("Richard","Aubrey"), "White", email = "hello@rwhite.no", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6747-1726")),
-  person(given = "Folkehelseinstituttet", role = c("cph"))
+  person(c("Richard","Aubrey"), "White", email = "hello@rwhite.no", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6747-1726"))
   )
 Description: Helpful functions for cleaning data.
 Depends: R (>= 3.3.0)
 License: MIT + file LICENSE
-URL: https://docs.sykdomspulsen.no/spltidy, https://github.com/sykdomspulsen-org/spltidy
-BugReports: https://github.com/sykdomspulsen-org/spltidy/issues
+URL: https://www.csids.no/cstidy/, https://github.com/csids/cstidy
+BugReports: https://github.com/csids/cstidy/issues
 Encoding: UTF-8
 LazyData: true
 Imports: data.table,

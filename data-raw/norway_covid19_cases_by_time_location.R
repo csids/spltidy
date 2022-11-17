@@ -1,4 +1,4 @@
-# create spltidy format data for cases
+# create cstidy format data for cases
 library(data.table)
 library(magrittr)
 
@@ -27,7 +27,7 @@ d
 
 
 # set to splfmt ----
-spltidy::set_splfmt_rts_data_v1(d)
+cstidy::set_splfmt_rts_data_v1(d)
 colnames(d)
 
 # change variable names
@@ -63,7 +63,7 @@ keyby=.(
   sex,
   isoyearweek
 )] %>%
-  spltidy::create_unified_columns()
+  cstidy::create_unified_columns()
 
 week
 
@@ -75,14 +75,14 @@ colnames(week)
 norway_covid19_cases_by_time_location <- rbind(d, week)
 
 # set to splfmt
-spltidy::set_splfmt_rts_data_v1(norway_covid19_cases_by_time_location)
+cstidy::set_splfmt_rts_data_v1(norway_covid19_cases_by_time_location)
 
 
 # save the data into data folder in .rda format
 usethis::use_data(norway_covid19_cases_by_time_location, overwrite = TRUE)
 
 
-# ?spltidy::norway_covid19_cases_by_time_location
+# ?cstidy::norway_covid19_cases_by_time_location
 
 
 

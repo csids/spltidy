@@ -13,7 +13,7 @@ d[, yrwk:=NULL]
 d[, x:=NULL]
 
 # set to splfmt
-spltidy::set_splfmt_rts_data_v1(d)
+cstidy::set_splfmt_rts_data_v1(d)
 
 # change variable names
 setnames(
@@ -43,7 +43,7 @@ week <- d[,.(
     sex,
     isoyearweek
   )] %>%
-  spltidy::create_unified_columns()
+  cstidy::create_unified_columns()
 
 week
 
@@ -52,10 +52,10 @@ week
 norway_covid19_icu_and_hospitalization <- rbind(d, week)
 
 # set to splfmt
-spltidy::set_splfmt_rts_data_v1(norway_covid19_icu_and_hospitalization)
+cstidy::set_splfmt_rts_data_v1(norway_covid19_icu_and_hospitalization)
 
 # save the data into data folder in .rda format
 usethis::use_data(norway_covid19_icu_and_hospitalization, overwrite = TRUE)
 
 
-# ?spltidy::norway_covid19_icu_and_hospitalization
+# ?cstidy::norway_covid19_icu_and_hospitalization
