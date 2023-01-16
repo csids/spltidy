@@ -26,8 +26,8 @@ d
 
 
 
-# set to splfmt ----
-cstidy::set_splfmt_rts_data_v1(d)
+# set to csfmt ----
+cstidy::set_csfmt_rts_data_v1(d)
 colnames(d)
 
 # change variable names
@@ -74,8 +74,8 @@ colnames(week)
 # put daily and weekly together
 norway_covid19_cases_by_time_location <- rbind(d, week)
 
-# set to splfmt
-cstidy::set_splfmt_rts_data_v1(norway_covid19_cases_by_time_location)
+# set to csfmt
+cstidy::set_csfmt_rts_data_v1(norway_covid19_cases_by_time_location)
 
 
 # save the data into data folder in .rda format

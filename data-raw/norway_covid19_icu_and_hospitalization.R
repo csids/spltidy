@@ -12,8 +12,8 @@ d[, week:=NULL]
 d[, yrwk:=NULL]
 d[, x:=NULL]
 
-# set to splfmt
-cstidy::set_splfmt_rts_data_v1(d)
+# set to csfmt
+cstidy::set_csfmt_rts_data_v1(d)
 
 # change variable names
 setnames(
@@ -51,8 +51,8 @@ week
 # put daily and weekly together
 norway_covid19_icu_and_hospitalization <- rbind(d, week)
 
-# set to splfmt
-cstidy::set_splfmt_rts_data_v1(norway_covid19_icu_and_hospitalization)
+# set to csfmt
+cstidy::set_csfmt_rts_data_v1(norway_covid19_icu_and_hospitalization)
 
 # save the data into data folder in .rda format
 usethis::use_data(norway_covid19_icu_and_hospitalization, overwrite = TRUE)

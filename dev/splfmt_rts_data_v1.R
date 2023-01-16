@@ -1,12 +1,12 @@
 d <- generate_test_data()
-set_splfmt_rts_data_v1(d, create_unified_columns = T)
+set_csfmt_rts_data_v1(d, create_unified_columns = T)
 d[1:4]
 
 d <- generate_test_data()
 d[]
-set_splfmt_rts_v1(d, create_unified_columns = F)
+set_csfmt_rts_v1(d, create_unified_columns = F)
 d[]
-set_splfmt_rts_v1(d, create_unified_columns = T)
+set_csfmt_rts_v1(d, create_unified_columns = T)
 d[]
 
 # Looking at the dataset
@@ -36,7 +36,7 @@ identify_data_structure(d, "deaths_n") %>% plot()
 
 
 d <- generate_test_data()
-set_splfmt_rts_data_v1(d)
+set_csfmt_rts_data_v1(d)
 d[1,isoyearweek := "2021-01"]
 d[2,isoyear := 2019]
 d[4:5,date := as.Date("2020-01-01")]
@@ -46,7 +46,7 @@ d[10,c("location_code") := .("norge")]
 
 
 d <- generate_test_data()
-set_splfmt_rts_v1(d)
+set_csfmt_rts_v1(d)
 d[, .(deaths_n = sum(deaths_n), location_code = "norge", granularity_geo = NA, date = "2021-01-01"), keyby=.(granularity_time)] %>%
   create_unified_columns() %>%
   #heal() |>
@@ -138,22 +138,22 @@ keyby = .(
 #### skeleton
 d <- generate_test_data()[c(1,4,10:.N)]
 d[]
-set_splfmt_rts_data_v1(d)
+set_csfmt_rts_data_v1(d)
 d[]
 
 
-make_skeleton_isoweek.splfmt_rts_data_v1 <- function(
+make_skeleton_isoweek.csfmt_rts_data_v1 <- function(
   isoyearweek_min = NULL,
   isoyearweek_max = NULL,
   granularity_geo = "all",
-  location_reference = spldata::nor_locations_names(),
+  location_reference = csdata::nor_locations_names(),
   ...) {
 
   if(yrwk_min==yrwk_max){
     yrwks <- isoyearweek_min
   } else {
-    isoyearweek_min <- which(spltime::dates_by_isoyearweek$isoyearweek==isoyearweek_min)
-    isoyearweek_max <- which(spltime::dates_by_isoyearweek$isoyearweek==isoyearweek_max)
+    isoyearweek_min <- which(cstime::dates_by_isoyearweek$isoyearweek==isoyearweek_min)
+    isoyearweek_max <- which(cstime::dates_by_isoyearweek$isoyearweek==isoyearweek_max)
     yrwks <- fhidata::world_dates_isoyearweek[yrwk_min:yrwk_max,yrwk]
   }
 

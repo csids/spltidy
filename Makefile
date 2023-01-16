@@ -105,7 +105,7 @@ pkgdown:
 	then
 		git add docs
 		git commit -am "Pkgdown built"
-		git subtree split --prefix docs -b gh-pages
+		git subtree csit --prefix docs -b gh-pages
 		git push -u -f origin gh-pages:gh-pages
 		git branch -D gh-pages
 		git reset --soft HEAD^

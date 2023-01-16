@@ -17,5 +17,5 @@
 }
 
 dummy_function <- function() {
-  spltime::isoyearweek_to_isoweek_c("2021-01")
+  cstime::isoyearweek_to_isoweek_c("2021-01")
 }

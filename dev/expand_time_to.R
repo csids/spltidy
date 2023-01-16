@@ -8,7 +8,7 @@ d %>%
 
 max_isoyearweek = "2022-05"
 d <- cstidy::generate_test_data() |>
-  cstidy::set_splfmt_rts_data_v1()
+  cstidy::set_csfmt_rts_data_v1()
 
 ids <- unique_time_series(d, set_time_series_id = TRUE)
 
@@ -18,12 +18,12 @@ ids[, max_isoyearweek := max_isoyearweek]
 
 retval <- vector("list", length = nrow(ids))
 for(i in seq_along(retval)){
-  index_min <- which(spltime::dates_by_isoyearweek$isoyearweek == ids$max_current_isoyearweek[i])+1
-  index_max <- which(spltime::dates_by_isoyearweek$isoyearweek == ids$max_isoyearweek[i])
+  index_min <- which(cstime::dates_by_isoyearweek$isoyearweek == ids$max_current_isoyearweek[i])+1
+  index_max <- which(cstime::dates_by_isoyearweek$isoyearweek == ids$max_isoyearweek[i])
   if(index_min >= index_max){
     break()
   }
-  new_isoyearweeks <- spltime::dates_by_isoyearweek$isoyearweek[index_min:index_max]
+  new_isoyearweeks <- cstime::dates_by_isoyearweek$isoyearweek[index_min:index_max]
   retval[[i]] <- copy(ids[rep(i,length(new_isoyearweeks))])
   retval[[i]][, isoyearweek := new_isoyearweeks]
 }
@@ -31,7 +31,7 @@ for(i in seq_along(retval)){
 retval <- rbindlist(retval)
 
 x <- rbindlist(list(d, retval), fill = T)
-cstidy::set_splfmt_rts_data_v1(x)
+cstidy::set_csfmt_rts_data_v1(x)
 setorder(x, time_series_id, date)
 
 
@@ -39,11 +39,11 @@ setorder(x, time_series_id, date)
 
 
 d <- cstidy::generate_test_data() |>
-  cstidy::set_splfmt_rts_data_v1()
+  cstidy::set_csfmt_rts_data_v1()
 d <- d[1:3]
 d
 d[1, granularity_time := "day"]
 d
 expand_time_to(d, max_isoyearweek = "2022-06", max_date = "2022-02-01")
 
-expand_time_to.splfmt_rts_data_v1(d, max_date = "2021-02-01")
+expand_time_to.csfmt_rts_data_v1(d, max_date = "2021-02-01")

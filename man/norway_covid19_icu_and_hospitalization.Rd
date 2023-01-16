@@ -5,7 +5,7 @@
 \alias{norway_covid19_icu_and_hospitalization}
 \title{Norwegian Covid-19 data for ICU and hospitalization}
 \format{
-A splfmt_rts_data_v1 with 919 rows and 18 variables:
+A csfmt_rts_data_v1 with 919 rows and 18 variables:
 \describe{
 \item{granularity_time}{day/isoweek}
 \item{granularity_geo}{nation}

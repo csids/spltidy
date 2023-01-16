@@ -1,13 +1,13 @@
 # cstidy 2022.5.31
 
-- In splfmt_rts_v1, age now uses underscores instead of hyphens so that valid variable names are generated when converting to wide-format.
+- In csfmt_rts_v1, age now uses underscores instead of hyphens so that valid variable names are generated when converting to wide-format.
 
 # cstidy 2022.5.25
 
 - Dataset covid19_msis_cases_by_time_location renamed to norway_covid19_cases_by_time_location.
-- In splfmt_rts_v1, the granularity_time for "an ongoing event" was changed from event_\*_9999_01_01 to event_\*_9999_09_09. This was done because isoyear for 9999-01-01 is 9998 (which is confusing), while isoyear for 9999-09-09 is 9999 (which makes sense).
-- In splfmt_rts_v1, the missing value for sex and age was changed to "missing" instead of NA_character_. This was chosen because NA_character_ requires special manipulation functions (is.na) which makes post-processing of data less efficient for the end-user.
-- In splfmt_rts_v1, cstidy::heal now works when granularity_time=='event_*'
+- In csfmt_rts_v1, the granularity_time for "an ongoing event" was changed from event_\*_9999_01_01 to event_\*_9999_09_09. This was done because isoyear for 9999-01-01 is 9998 (which is confusing), while isoyear for 9999-09-09 is 9999 (which makes sense).
+- In csfmt_rts_v1, the missing value for sex and age was changed to "missing" instead of NA_character_. This was chosen because NA_character_ requires special manipulation functions (is.na) which makes post-processing of data less efficient for the end-user.
+- In csfmt_rts_v1, cstidy::heal now works when granularity_time=='event_*'
 
 # cstidy 2022.5.19
 
@@ -19,11 +19,11 @@
 
 # cstidy 2022.4.26
 
-- save_spl, read_spl functions to save/read data efficiently, allowing passwordless encryption.
+- save_cs, read_cs functions to save/read data efficiently, allowing passwordless encryption.
 
 # cstidy 2022.4.22
 
-- print.splfmt_rts_data_v1 now automatically rounds numerics to 4 decimal places
+- print.csfmt_rts_data_v1 now automatically rounds numerics to 4 decimal places
 
 # cstidy 2022.4.7
 

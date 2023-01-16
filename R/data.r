@@ -2,7 +2,7 @@
 #'
 #' This data was extracted on 2022-05-04.
 #'
-#' @format A splfmt_rts_data_v1 with 919 rows and 18 variables:
+#' @format A csfmt_rts_data_v1 with 919 rows and 18 variables:
 #' \describe{
 #'   \item{granularity_time}{day/isoweek}
 #'   \item{granularity_geo}{nation}
@@ -38,7 +38,7 @@
 #'
 #' This data was extracted on 2022-05-04.
 #'
-#' @format A splfmt_rts_data_v1 with 11028 rows and 18 variables:
+#' @format A csfmt_rts_data_v1 with 11028 rows and 18 variables:
 #' \describe{
 #'   \item{granularity_time}{day/isoweek}
 #'   \item{granularity_geo}{nation, county}

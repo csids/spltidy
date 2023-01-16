@@ -5,7 +5,7 @@
 \alias{norway_covid19_cases_by_time_location}
 \title{Covid-19 data for PCR-confirmed cases in Norway (nation and county)}
 \format{
-A splfmt_rts_data_v1 with 11028 rows and 18 variables:
+A csfmt_rts_data_v1 with 11028 rows and 18 variables:
 \describe{
 \item{granularity_time}{day/isoweek}
 \item{granularity_geo}{nation, county}

@@ -1,10 +1,10 @@
 ---
-title: "Data format (splfmt_rts_data_v1)"
+title: "Data format (csfmt_rts_data_v1)"
 author: "Richard Aubrey White"
 date: "2022-04-20"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data format (splfmt_rts_data_v1)}
+  %\VignetteIndexEntry{Data format (csfmt_rts_data_v1)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -21,11 +21,11 @@ library(data.table)
 library(magrittr)
 ```
 
-## splfmt_rts_data_v1
+## csfmt_rts_data_v1
 
-This document presents the data format `splfmt_rts_data_v1`.
+This document presents the data format `csfmt_rts_data_v1`.
 
-`splfmt_rts_data_v1` is the data format that the Sykdomspulsen team recommends using for the real-time surveillance of infectious diseases.
+`csfmt_rts_data_v1` is the data format that the Sykdomspulsen team recommends using for the real-time surveillance of infectious diseases.
 
 ## Style
 
@@ -62,7 +62,7 @@ e.g. A database table could be called `msis_by_time_location_age_sex` or a filen
 
 ## Time
 
-Time functions can be obtained from [spltime](/spltime). Missing time data should be coded as `NA`. Uncommon/internal use is demarcated by a line through the text.
+Time functions can be obtained from [cstime](/cstime). Missing time data should be coded as `NA`. Uncommon/internal use is demarcated by a line through the text.
 
 ```{r echo=FALSE, results='asis'}
 d <- rbind(
@@ -75,31 +75,31 @@ d <- rbind(
   data.frame(
     granularity_time = "isoweek (numeric)",
     class = "numeric",
-    fn = "spltime::isoweek_n",
+    fn = "cstime::isoweek_n",
     example = "1"
   ),
   data.frame(
     granularity_time = "isoweek (character)",
     class = "character",
-    fn = "spltime::isoweek_c",
+    fn = "cstime::isoweek_c",
     example = "\"01\""
   ),
   data.frame(
     granularity_time = "isoyear (numeric)",
     class = "character",
-    fn = "spltime::isoyear_n",
+    fn = "cstime::isoyear_n",
     example = "2021"
   ),
   data.frame(
     granularity_time = "isoyear (character)",
     class = "character",
-    fn = "spltime::isoyear_c",
+    fn = "cstime::isoyear_c",
     example = "\"2021\""
   ),
   data.frame(
     granularity_time = "isoyearweek",
     class = "character",
-    fn = "spltime::isoyearweek_c",
+    fn = "cstime::isoyearweek_c",
     example = "\"2021-01\""
   ),
   data.frame(
@@ -114,7 +114,7 @@ gt::gt(d) %>%
   gt::tab_options(
     table.width = "1100px"
   ) %>%
-  gt::tab_header(title = "Valid times in the splverse format") %>%
+  gt::tab_header(title = "Valid times in the csverse format") %>%
   gt::cols_label(
     granularity_time = "Time (Granularity)",
     class = "Class",
@@ -205,10 +205,10 @@ gt::gt(d) %>%
 
 ## Location
 
-Locations can be obtained from [spldata](/spldata). Valid locations (and location types) are available in `spldata::nor_locations_names()`.  Uncommon/internal use is demarcated by a line through the text.
+Locations can be obtained from [csdata](/csdata). Valid locations (and location types) are available in `csdata::nor_locations_names()`.  Uncommon/internal use is demarcated by a line through the text.
 
 ```{r echo=FALSE, results='asis'}
-d <- spldata::nor_locations_names()[, .(
+d <- csdata::nor_locations_names()[, .(
   n = .N,
   location_code = location_code[1],
   location_name = location_name[1],
@@ -223,7 +223,7 @@ gt::gt(d) %>%
   gt::tab_options(
     table.width = "1500px"
   ) %>%
-  gt::tab_header(title = "Valid locations and location types in the splverse format") %>%
+  gt::tab_header(title = "Valid locations and location types in the csverse format") %>%
   gt::cols_label(
     granularity_geo = "Geo (Granularity)",
     n = "N"
@@ -334,7 +334,7 @@ d <- rbind(
 )
 
 gt::gt(d) %>%
-  gt::tab_header(title = "Valid ages in the splverse format") %>%
+  gt::tab_header(title = "Valid ages in the csverse format") %>%
   gt::cols_label(
     value = "Value",
     definition = "Definition"
@@ -374,7 +374,7 @@ d <- rbind(
 )
 
 gt::gt(d) %>%
-  gt::tab_header(title = "Valid sexes in the splverse format") %>%
+  gt::tab_header(title = "Valid sexes in the csverse format") %>%
   gt::cols_label(
     value = "Value",
     definition = "Definition"
@@ -385,9 +385,9 @@ Missing sexes should be coded as "missing".
 
 ## Unified columns
 
-All datasets in the splverse format splfmt_rts_data_v1 will contain these 16 columns.
+All datasets in the csverse format csfmt_rts_data_v1 will contain these 16 columns.
 
-Time conversion functions can be found in package [spltime](https://docs.sykdomspulsen.no/spltime). 
+Time conversion functions can be found in package [cstime](https://docs.sykdomspulsen.no/cstime). 
 
 ```{r echo=FALSE, results='asis'}
 d <- rbind(
@@ -398,7 +398,7 @@ d <- rbind(
   ),
   data.frame(
     variable = "granularity_geo",
-    accepted_values = paste0("\"", paste0(unique(spldata::nor_locations_names()$granularity_geo), collapse = "\", \""), "\""),
+    accepted_values = paste0("\"", paste0(unique(csdata::nor_locations_names()$granularity_geo), collapse = "\", \""), "\""),
     definition = "Granularity of geography"
   ),
   data.frame(
@@ -429,17 +429,17 @@ d <- rbind(
   data.frame(
     variable = "isoyear",
     accepted_values = "YYYY",
-    definition = "Use function spltime::isoyear_n"
+    definition = "Use function cstime::isoyear_n"
   ),
   data.frame(
     variable = "isoweek",
     accepted_values = "1, 2, ..., 53",
-    definition = "Use functions spltime::*_to_isoweek_n"
+    definition = "Use functions cstime::*_to_isoweek_n"
   ),
   data.frame(
     variable = "isoyearweek",
     accepted_values = "\"YYYY-WW\"",
-    definition = "Use function spltime::isoyearweek_c"
+    definition = "Use function cstime::isoyearweek_c"
   ),
   data.frame(
     variable = "season",
@@ -488,7 +488,7 @@ gt::gt(d) %>%
   gt::cols_align(
     align = "left"
   ) %>%
-  gt::tab_header(title = "Unified columns (16) in the splverse format splfmt_rts_data_v1") %>%
+  gt::tab_header(title = "Unified columns (16) in the csverse format csfmt_rts_data_v1") %>%
   gt::cols_label(
     variable = "Variable",
     accepted_values = "Accepted values",
@@ -498,7 +498,7 @@ gt::gt(d) %>%
 
 ### Smart assignment
 
-`splfmt_rts_data_v1` does smart assignment for time and geography.
+`csfmt_rts_data_v1` does smart assignment for time and geography.
 
 When the **variables in bold** are assigned using `:=`, the listed variables will be automatically imputed.
 
@@ -682,7 +682,7 @@ gt::gt(d) %>%
   gt::cols_align(
     align = "left"
   ) %>%
-  gt::tab_header(title = "Context-specific columns in the splverse format splfmt_rts_data_v1") %>%
+  gt::tab_header(title = "Context-specific columns in the csverse format csfmt_rts_data_v1") %>%
   gt::cols_label(
     x = "",
     examples = "Examples",
@@ -761,7 +761,7 @@ An example relating to vaccination:
 
 ```{r}
 d <- cstidy::generate_test_data()[1:5]
-cstidy::set_splfmt_rts_data_v1(d)
+cstidy::set_csfmt_rts_data_v1(d)
 
 # Looking at the dataset
 d[]
@@ -793,14 +793,14 @@ d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_
   print()
 
 # Collapsing down to different levels, without healing the dataset and without
-# removing the class splfmt_rts_data_v1 (this is uncommon)
+# removing the class csfmt_rts_data_v1 (this is uncommon)
 d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_time)] %>%
   print()
 
-# Collapsing to different levels, and removing the class splfmt_rts_data_v1 because
+# Collapsing to different levels, and removing the class csfmt_rts_data_v1 because
 # it is going to be used in new output/analyses
 d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby = .(granularity_time)] %>%
-  cstidy::remove_class_splfmt_rts_data() %>%
+  cstidy::remove_class_csfmt_rts_data() %>%
   print()
 ```
 
@@ -810,7 +810,7 @@ Sometimes you need to expand the number of rows in a dataset to a future time.
 
 ```{r}
 cstidy::generate_test_data() %>%
-  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::set_csfmt_rts_data_v1() %>%
   dplyr::filter(location_code == "county03") %>%
   cstidy::expand_time_to(max_isoyearweek = "2022-08") %>%
   print()
@@ -822,7 +822,7 @@ We might also need to identify how many time series are in one dataset.
 
 ```{r}
 cstidy::generate_test_data() %>%
-  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::set_csfmt_rts_data_v1() %>%
   cstidy::unique_time_series()
 ```
 
@@ -832,7 +832,7 @@ We need a way to easily summarize the data structure of a dataset.
 
 ```{r}
 cstidy::generate_test_data() %>%
-  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::set_csfmt_rts_data_v1() %>%
   summary()
 ```
 
@@ -842,19 +842,19 @@ We need a way to easily summarize the data structure of one column inside a data
 
 ```{r}
 cstidy::generate_test_data() %>%
-  cstidy::set_splfmt_rts_data_v1() %>%
+  cstidy::set_csfmt_rts_data_v1() %>%
   cstidy::identify_data_structure("deaths_n") %>%
   plot()
 ```
 
 ## Reference (Location)
 
-Locations can be obtained from [spldata](/spldata). Valid locations (and location types) are available in `spldata::nor_locations_names()`.
+Locations can be obtained from [csdata](/csdata). Valid locations (and location types) are available in `csdata::nor_locations_names()`.
 
 Here we list as a reference table the valid `location_code`s and `location_name_description_nb`s (the two most commonly used locations).
 
 ```{r echo=FALSE, results='asis'}
-d <- spldata::nor_locations_names()[, .(
+d <- csdata::nor_locations_names()[, .(
   location_order = paste0("#", location_order),
   location_code,
   location_name_description_nb
