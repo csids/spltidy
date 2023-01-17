@@ -1,3 +1,8 @@
+# cstidy 2022.1.17
+
+- Dataset norway_covid19_cases_by_time_location renamed to nor_covid19_cases_by_time_location_csfmt_rts_v1.
+- Dataset norway_covid19_icu_and_hospitalization renamed to nor_covid19_icu_and_hospitalization_csfmt_rts_v1.
+
 # cstidy 2022.5.31
 
 - In csfmt_rts_v1, age now uses underscores instead of hyphens so that valid variable names are generated when converting to wide-format.

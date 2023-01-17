@@ -1551,7 +1551,7 @@ expand_time_to_max_date.csfmt_rts_data_v1 <- function(x, max_date = NULL, ...) {
 #' @param x Dataset
 #' @param ... X
 #' @examples
-#' csstyle::plot_epicurve(cstidy::norway_covid19_cases_by_time_location[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
+#' csstyle::plot_epicurve(cstidy::nor_covid19_cases_by_time_location_csfmt_rts_v1[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
 #' @importFrom csstyle plot_epicurve
 #' @method plot_epicurve csfmt_rts_data_v1
 #' @export

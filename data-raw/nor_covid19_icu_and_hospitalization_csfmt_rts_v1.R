@@ -5,6 +5,7 @@ library(magrittr)
 # import data
 # daily, nation
 d <- data.table::fread("data-raw/covid19_hospital.csv")
+d[location_code=="norge", location_code := "nation_nor"]
 d[, date:=as.Date(date)]
 d[, date_of_publishing:=NULL]
 d[, year:=NULL]
@@ -49,13 +50,13 @@ week
 
 
 # put daily and weekly together
-norway_covid19_icu_and_hospitalization <- rbind(d, week)
+nor_covid19_icu_and_hospitalization_csfmt_rts_v1 <- rbind(d, week)
 
 # set to csfmt
-cstidy::set_csfmt_rts_data_v1(norway_covid19_icu_and_hospitalization)
+cstidy::set_csfmt_rts_data_v1(nor_covid19_icu_and_hospitalization_csfmt_rts_v1)
 
 # save the data into data folder in .rda format
-usethis::use_data(norway_covid19_icu_and_hospitalization, overwrite = TRUE)
+usethis::use_data(nor_covid19_icu_and_hospitalization_csfmt_rts_v1, overwrite = TRUE)
 
 
 # ?cstidy::norway_covid19_icu_and_hospitalization

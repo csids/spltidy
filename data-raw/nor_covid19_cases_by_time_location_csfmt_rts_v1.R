@@ -5,6 +5,8 @@ library(magrittr)
 # import data
 # daily, nation
 d <- data.table::fread("data-raw/covid19_cases.csv")
+d[location_code=="norge", location_code := "nation_nor"]
+d[location_code!="nation_nor", location_code := stringr::str_replace(location_code, "county", "county_nor")]
 
 # remove pop and location for future use
 d_pop_by_loc_time <- copy(unique(d[, .(year, pop, location_code, location_name)]))
@@ -72,14 +74,14 @@ colnames(d)
 colnames(week)
 
 # put daily and weekly together
-norway_covid19_cases_by_time_location <- rbind(d, week)
+nor_covid19_cases_by_time_location_csfmt_rts_v1 <- rbind(d, week)
 
 # set to csfmt
-cstidy::set_csfmt_rts_data_v1(norway_covid19_cases_by_time_location)
+cstidy::set_csfmt_rts_data_v1(nor_covid19_cases_by_time_location_csfmt_rts_v1)
 
 
 # save the data into data folder in .rda format
-usethis::use_data(norway_covid19_cases_by_time_location, overwrite = TRUE)
+usethis::use_data(nor_covid19_cases_by_time_location_csfmt_rts_v1, overwrite = TRUE)
 
 
 # ?cstidy::norway_covid19_cases_by_time_location
