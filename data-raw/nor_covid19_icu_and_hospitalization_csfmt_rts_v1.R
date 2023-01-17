@@ -35,7 +35,8 @@ d
 # weekly aggregation
 week <- d[,.(
   icu_with_positive_pcr_n = sum(icu_with_positive_pcr_n),
-  hospitalization_with_covid19_as_primary_cause_n = sum(hospitalization_with_covid19_as_primary_cause_n)
+  hospitalization_with_covid19_as_primary_cause_n = sum(hospitalization_with_covid19_as_primary_cause_n),
+  granularity_time = "isoweek"
   ),
   keyby=.(
     location_code,

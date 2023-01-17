@@ -56,7 +56,8 @@ d
 # granularity time: isoweek
 week <- d[,.(
   covid19_cases_testdate_n = sum(covid19_cases_testdate_n),
-  covid19_cases_testdate_pr100000 = sum(covid19_cases_testdate_pr100000)
+  covid19_cases_testdate_pr100000 = sum(covid19_cases_testdate_pr100000),
+  granularity_time = "isoweek"
 ),
 keyby=.(
   location_code,
