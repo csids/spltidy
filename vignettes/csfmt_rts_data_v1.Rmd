@@ -1,7 +1,5 @@
 ---
 title: "Data format (csfmt_rts_data_v1)"
-author: "Richard Aubrey White"
-date: "2022-04-20"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Data format (csfmt_rts_data_v1)}
