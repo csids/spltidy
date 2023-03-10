@@ -33,5 +33,5 @@ Suggests: testthat,
     dplyr,
     purrr
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr
