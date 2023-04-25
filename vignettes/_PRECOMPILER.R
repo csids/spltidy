@@ -2,7 +2,7 @@
 devtools::load_all("~/r-packages/cstidy")
 setwd("~/r-packages/cstidy/vignettes")
 
-knitr::knit("csfmt_rts_data_v1.Rmd.orig", "csfmt_rts_data_v1.Rmd")
+knitr::knit("benchmarks.Rmd.orig", "benchmarks.Rmd")
 setwd("~/r-packages/cstidy")
 
 # pkgdown::build_site("~/norsyss")
