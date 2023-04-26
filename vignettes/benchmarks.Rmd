@@ -13,4 +13,9 @@ editor_options:
 
 ## set_csfmt_rts_data_v1
 
+
+```
+#> Error in `[.data.table`(x, !is.na(x_modified_timevar_97531), `:=`(c("granularity_time", : When deleting columns, i should not be provided
+```
+
 <img src="benchmarks-unnamed-chunk-1-1.png" alt="plot of chunk unnamed-chunk-1" width="100%" />
