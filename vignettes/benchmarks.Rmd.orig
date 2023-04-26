@@ -75,7 +75,7 @@ pd <- rbindlist(d_performance)
 q <- ggplot(pd, aes(x=version, y = time_to_run_sec, group = 1))
 q <- q + geom_line()
 q <- q + scale_y_continuous("Seconds")
-q <- q + scale_x_continuous("Version")
+q <- q + scale_x_date("Version")
 q <- q + labs(title="cstidy::set_csfmt_rts_data_v1 applied to an 80 million row dataset")
 q <- q + expand_limits(y=0)
 q

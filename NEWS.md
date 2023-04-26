@@ -1,3 +1,7 @@
+# Version 2023.4.26
+
+- `cstidy::set_csfmt_rts_data_v1` is now 1.5x faster due to using the upgraded `cstime` package that now uses binary searches. An 80 million row dataset is now processed in 2 minutes, instead of 3.
+
 # Version 2023.4.25
 
 - `cstidy::set_csfmt_rts_data_v1` is now 6x faster due to using the upgraded `cstime` package that now uses `csutil::apply_fn_via_hash_table`. An 80 million row dataset is now processed in 3 minutes, instead of 20.
