@@ -1,6 +1,7 @@
 # create cstidy format data for cases
 library(data.table)
 library(magrittr)
+devtools::load_all()
 
 # import data
 # daily, nation
@@ -22,14 +23,14 @@ d[, x := NULL]
 # drop pop and location
 d[, location_name:= NULL]
 d[, pop := NULL]
+d[, granularity_time := "date"]
 d
-# granularity_time: day
 # granularity_geo: county, nation
 
 
 
 # set to csfmt ----
-cstidy::set_csfmt_rts_data_v1(d)
+set_csfmt_rts_data_v1(d)
 colnames(d)
 
 # change variable names
@@ -57,7 +58,7 @@ d
 week <- d[,.(
   covid19_cases_testdate_n = sum(covid19_cases_testdate_n),
   covid19_cases_testdate_pr100000 = sum(covid19_cases_testdate_pr100000),
-  granularity_time = "isoweek"
+  granularity_time = "isoyearweek"
 ),
 keyby=.(
   location_code,

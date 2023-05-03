@@ -34,7 +34,7 @@ library(ggplot2)
 ```{r echo=FALSE, results='asis'}
 skeleton <- expand.grid(
   location_code = csdata::nor_locations_names()[granularity_geo %in% c("nation", "county", "municip")]$location_code,
-  granularity_time = "day",
+  granularity_time = "date",
   date = seq(as.Date("2001-01-01"), as.Date("2020-12-31"), 1),
   age = c(
     "000_010",

@@ -74,7 +74,7 @@ Time functions can be obtained from [cstime](/cstime). Missing time data should 
 ```{r echo=FALSE, results='asis'}
 d <- rbind(
   data.frame(
-    granularity_time = "day",
+    granularity_time = "date",
     class = "Date",
     fn = "as.Date",
     example = "2021-12-31"
@@ -400,7 +400,7 @@ Time conversion functions can be found in package [cstime](https://docs.sykdomsp
 d <- rbind(
   data.frame(
     variable = "granularity_time",
-    accepted_values = gt::html("\"day\", \"isoweek\", \"isoyear\", \"event_*_*_to_*\" (<a href='#time'>Time</a>)"),
+    accepted_values = gt::html("\"date\", \"isoyearweek\", \"isoyear\", \"event_*_*_to_*\" (<a href='#time'>Time</a>)"),
     definition = "Granularity of time"
   ),
   data.frame(
@@ -588,7 +588,7 @@ d <- rbind(
   data.frame(
     x = "",
     examples = "sum0_13",
-    definition = "The sum of values for the given date and the previous 13 days. If granularity_time=='isoweek' and the given isoweek has full data, then it is the sum of values for the Sunday in the given isoweek and the previous 13 days. If granularity_time=='isoweek' and the given isoweek does not have full data, or granularity_time=='event_*_to_9999_09_09' (ongoing event), then it is the sum of values for the last day with data and the previous 13 days."
+    definition = "The sum of values for the given date and the previous 13 days. If granularity_time=='isoyearweek' and the given isoweek has full data, then it is the sum of values for the Sunday in the given isoweek and the previous 13 days. If granularity_time=='isoyearweek' and the given isoweek does not have full data, or granularity_time=='event_*_to_9999_09_09' (ongoing event), then it is the sum of values for the last day with data and the previous 13 days."
   ),
   data.frame(
     x = "",
@@ -742,7 +742,7 @@ An example relating to number of covid-19 cases:
 
 - **covid19_cases_regdate/\_n**: Number of covid-19 cases by registration date.
 - **covid19_cases_testdate/\_n**: Number of covid-19 cases by testing date.
-- **covid19_cases_testdate/\_sum0_13/\_n**: The sum of 14 days of cases. When granularity_time=='day', date=='2022-01-20', and the current date is '2022-02-07', the value is the sum of covid19_cases_testdate_n between '2022-01-07' and '2022-01-20'. When granularity_time=='isoweek',  isoyearweek=='2022-03', and the current date is '2022-02-07' (Monday in isoyearweek '2022-06') the value is the sum of covid19_cases_testdate_n between '2022-01-10' (Monday in isoyearweek '2022-02') and '2022-01-23' (Sunday in isoyearweek '2022-03'). When granularity_time=='isoweek',  isoyearweek=='2022-06', and the current date is '2022-02-07' (Monday in isoyearweek '2022-06'), the value is the sum of covid19_cases_testdate_n between the last day with available data and 13 days prior. When granularity_time=='event_covid19_norway_2020_02_21_to_9999_09_09', the value is the sum of covid19_cases_testdate_n between the last day with available data and 13 days prior.
+- **covid19_cases_testdate/\_sum0_13/\_n**: The sum of 14 days of cases. When granularity_time=='date', date=='2022-01-20', and the current date is '2022-02-07', the value is the sum of covid19_cases_testdate_n between '2022-01-07' and '2022-01-20'. When granularity_time=='isoyearweek',  isoyearweek=='2022-03', and the current date is '2022-02-07' (Monday in isoyearweek '2022-06') the value is the sum of covid19_cases_testdate_n between '2022-01-10' (Monday in isoyearweek '2022-02') and '2022-01-23' (Sunday in isoyearweek '2022-03'). When granularity_time=='isoyearweek',  isoyearweek=='2022-06', and the current date is '2022-02-07' (Monday in isoyearweek '2022-06'), the value is the sum of covid19_cases_testdate_n between the last day with available data and 13 days prior. When granularity_time=='event_covid19_norway_2020_02_21_to_9999_09_09', the value is the sum of covid19_cases_testdate_n between the last day with available data and 13 days prior.
 - **covid19_cases_testdate/\_sum0_999999/\_n**: The sum of all recorded days of cases.
 - **covid19_cases_testdate/\_sum0_13/\_n**: Expected number of nowcasted deaths (i.e. baseline).
 - **deaths_nowcasted_baseline/\_predinterval_q02x5/\_n**: The 2.5th quantile of an expected new observation of nowcasted deaths (frequentist).

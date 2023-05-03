@@ -4,7 +4,7 @@ formats$csfmt_rts_data_v1$unified <- list()
 formats$csfmt_rts_data_v1$unified$granularity_time <- list(
   NA_allowed = FALSE,
   NA_class = NA_character_,
-  values_allowed = c("day", "isoweek", "isoyear"),
+  values_allowed = c("date", "isoyearweek", "isoyear"),
   class = "character"
 )
 
@@ -283,6 +283,81 @@ print.csfmt_rts_data_v1 <- function(x, ...) {
   }
 }
 
+# heal_time_csfmt_rts_data_v1 <- function(x, cols, from){
+#   print(x)
+#   print(cols)
+#   print(from)
+#   csutil::apply_fn_via_hash_table(x, heal_time_csfmt_rts_data_v1_internal, cols=cols, from=from)
+# }
+
+
+#' Heals time
+#' @param x The timepoints that need healing
+#' @param cols The columns that should be returned
+#' @param granularity_time The granularity of x
+#' @export
+heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
+  stopifnot(granularity_time %in% c("date", "isoyearweek", "isoyear"))
+  if(granularity_time=="date"){
+    columns <- c(
+      "granularity_time",
+      "isoyear",
+      "isoweek",
+      "isoyearweek",
+      "season",
+      "seasonweek",
+      "calyear",
+      "calmonth",
+      "calyearmonth"
+    )
+    columns <- columns[columns %in% cols]
+    return(
+      csfmt_rts_data_v1_date_to[
+        .(x),
+        ..columns
+      ]
+    )
+  } else if(granularity_time=="isoyearweek"){
+    columns <- c(
+      "granularity_time",
+      "isoyear",
+      "isoweek",
+      "season",
+      "seasonweek",
+      "calyear",
+      "calmonth",
+      "calyearmonth",
+      "date"
+    )
+    columns <- columns[columns %in% cols]
+    return(
+      csfmt_rts_data_v1_isoyearweek_to[
+        .(x),
+        ..columns
+      ]
+    )
+  } else if(granularity_time=="isoyear"){
+    columns <- c(
+      "granularity_time",
+      "isoweek",
+      "isoyearweek",
+      "season",
+      "seasonweek",
+      "calyear",
+      "calmonth",
+      "calyearmonth",
+      "date"
+    )
+    columns <- columns[columns %in% cols]
+    return(
+      csfmt_rts_data_v1_isoyear_to[
+        .(x),
+        ..columns
+      ]
+    )
+  }
+}
+
 #' @method [ csfmt_rts_data_v1
 #' @export
 "[.csfmt_rts_data_v1" <- function(x, ...) {
@@ -345,56 +420,73 @@ print.csfmt_rts_data_v1 <- function(x, ...) {
       }
 
       if (time_var_modified == "isoyear") {
-        healing_options <- list(
-          "granularity_time" = "\"isoyear\"",
-          "isoweek" = "cstime::isoyear_to_last_isoweek_n(isoyear)",
-          "isoyearweek" = "cstime::isoyear_to_last_isoyearweek_c(isoyear)",
-          "season" = "NA_character_",
-          "seasonweek" = "NA_real_",
-          "calyear" = "NA_integer_",
-          "calmonth" = "NA_integer_",
-          "calyearmonth" = "NA_character_",
-          "date" = "cstime::isoyear_to_last_date(isoyear)"
-        )
+        # healing_options <- list(
+        #   "granularity_time" = "\"isoyear\"",
+        #   "isoweek" = "cstime::isoyear_to_last_isoweek_n(isoyear)",
+        #   "isoyearweek" = "cstime::isoyear_to_last_isoyearweek_c(isoyear)",
+        #   "season" = "NA_character_",
+        #   "seasonweek" = "NA_real_",
+        #   "calyear" = "NA_integer_",
+        #   "calmonth" = "NA_integer_",
+        #   "calyearmonth" = "NA_character_",
+        #   "date" = "cstime::isoyear_to_last_date(isoyear)"
+        # )
+        healing_options <- names(heal_time_csfmt_rts_data_v1(2020, names(x), granularity_time="isoyear"))
+        healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(isoyear, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"isoyear\")')
       } else if (time_var_modified == "isoyearweek") {
-        healing_options <- list(
-          "granularity_time" = "\"isoweek\"",
-          "isoyear" = "cstime::isoyearweek_to_isoyear_n(isoyearweek)",
-          "isoweek" = "cstime::isoyearweek_to_isoweek_n(isoyearweek)",
-          "season" = "cstime::isoyearweek_to_season_c(isoyearweek)",
-          "seasonweek" = "cstime::isoyearweek_to_seasonweek_n(isoyearweek)",
-          "calyear" = "NA_integer_",
-          "calmonth" = "NA_integer_",
-          "calyearmonth" = "NA_character_",
-          "date" = "cstime::isoyearweek_to_last_date(isoyearweek)"
-        )
+        # healing_options <- list(
+        #   "granularity_time" = "\"isoweek\"",
+        #   "isoyear" = "cstime::isoyearweek_to_isoyear_n(isoyearweek)",
+        #   "isoweek" = "cstime::isoyearweek_to_isoweek_n(isoyearweek)",
+        #   "season" = "cstime::isoyearweek_to_season_c(isoyearweek)",
+        #   "seasonweek" = "cstime::isoyearweek_to_seasonweek_n(isoyearweek)",
+        #   "calyear" = "NA_integer_",
+        #   "calmonth" = "NA_integer_",
+        #   "calyearmonth" = "NA_character_",
+        #   "date" = "cstime::isoyearweek_to_last_date(isoyearweek)"
+        # )
+        healing_options <- names(heal_time_csfmt_rts_data_v1("2020-01", names(x), granularity_time="isoyearweek"))
+        healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(isoyearweek, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"isoyearweek\")')
+
       } else if (time_var_modified == "date") {
-        healing_options <- list(
-          "granularity_time" = "\"day\"",
-          "isoyear" = "cstime::date_to_isoyear_n(date)",
-          "isoweek" = "cstime::date_to_isoweek_n(date)",
-          "isoyearweek" = "cstime::date_to_isoyearweek_c(date)",
-          "season" = "cstime::date_to_season_c(date)",
-          "seasonweek" = "cstime::date_to_seasonweek_n(date)",
-          "calyear" = "cstime::date_to_calyear_n(date)",
-          "calmonth" = "cstime::date_to_calmonth_n(date)",
-          "calyearmonth" = "cstime::date_to_calyearmonth_c(date)"
-        )
+        # healing_options <- list(
+        #   "granularity_time" = "\"day\"",
+        #   "isoyear" = "cstime::date_to_isoyear_n(date)",
+        #   "isoweek" = "cstime::date_to_isoweek_n(date)",
+        #   "isoyearweek" = "cstime::date_to_isoyearweek_c(date)",
+        #   "season" = "cstime::date_to_season_c(date)",
+        #   "seasonweek" = "cstime::date_to_seasonweek_n(date)",
+        #   "calyear" = "cstime::date_to_calyear_n(date)",
+        #   "calmonth" = "cstime::date_to_calmonth_n(date)",
+        #   "calyearmonth" = "cstime::date_to_calyearmonth_c(date)"
+        # )
+        healing_options <- names(heal_time_csfmt_rts_data_v1(as.Date("2020-01-01"), names(x), granularity_time="date"))
+        healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(date, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"date\")')
       } else {
         healing_options <- NULL
+        healing_function <- NULL
       }
 
+      # if (!is.null(healing_options)) {
+      #   healing_options <- healing_options[names(healing_options) %in% names(x)]
+      #   if (length(healing_options) > 0) {
+      #     healing_calls[[length(healing_calls) + 1]] <- glue::glue(
+      #       '{orig_call[[2]]}[!is.na(x_modified_timevar_97531),
+      #       c("{paste0(names(healing_options), collapse="\\",\\"")}")
+      #       :=
+      #       .({paste0(healing_options, collapse=",")})
+      #       ]'
+      #     )
+      #   }
+      # }
       if (!is.null(healing_options)) {
-        healing_options <- healing_options[names(healing_options) %in% names(x)]
-        if (length(healing_options) > 0) {
-          healing_calls[[length(healing_calls) + 1]] <- glue::glue(
-            '{orig_call[[2]]}[!is.na(x_modified_timevar_97531),
-            c("{paste0(names(healing_options), collapse="\\",\\"")}")
-            :=
-            .({paste0(healing_options, collapse=",")})
-            ]'
-          )
-        }
+        healing_calls[[length(healing_calls) + 1]] <- glue::glue(
+          '{orig_call[[2]]}[!is.na(x_modified_timevar_97531),
+          c("{paste0(healing_options, collapse="\\",\\"")}")
+          :=
+          {healing_function}
+          ]'
+        )
       }
 
       healing_calls[[length(healing_calls) + 1]] <- glue::glue(
@@ -557,7 +649,7 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
       c(
         "granularity_time", "date"
       ) := .(
-        "day",
+        "date",
         as.Date(
           stringr::str_replace_all(
             stringr::str_extract(granularity_time,"[0-9][0-9][0-9][0-9]_[0-9][0-9]_[0-9][0-9]$"),
@@ -583,14 +675,8 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
   time_vars_to_loop_through <- time_vars[time_vars %in% c("isoyear","isoyearweek","date")]
   for(i in time_vars_to_loop_through){
     other_time_vars <- time_vars[time_vars != i]
+    time_var_as_granularity_geo <- i
 
-    if(i=="isoyearweek"){
-      time_var_as_granularity_geo <- "isoweek"
-    } else if(i=="date"){
-      time_var_as_granularity_geo <- "day"
-    } else {
-      time_var_as_granularity_geo <- i
-    }
     if(length(other_time_vars)>=1){
       txt <- glue::glue(
         '
@@ -666,13 +752,7 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
       if(type=="geo"){
         extra_restriction <- ''
       } else if(type=="time"){
-        if(imputed_from=="isoyearweek"){
-          time_var_as_granularity_time <- "isoweek"
-        } else if(imputed_from=="date"){
-          time_var_as_granularity_time <- "day"
-        } else {
-          time_var_as_granularity_time <- imputed_from
-        }
+        time_var_as_granularity_time <- imputed_from
         extra_restriction <- glue::glue('granularity_time==\"{time_var_as_granularity_time}" &')
       } else {
         stop("")
@@ -1077,7 +1157,7 @@ identify_data_structure_internal <- function(summarized, col) {
   # - num_na
 
   skeleton <- CJ(
-    granularity_time = c("isoyear", "isoweek", "date"),
+    granularity_time = c("isoyear", "isoyearweek", "date"),
     granularity_geo = unique(csdata::nor_locations_names()$granularity_geo),
     age = unique(summarized$age),
     sex = unique(summarized$sex)

@@ -1,6 +1,7 @@
 ## code to prepare `DATASET` dataset goes here
 library(data.table)
 library(magrittr)
+devtools::load_all()
 
 # import data
 # daily, nation
@@ -12,6 +13,8 @@ d[, year:=NULL]
 d[, week:=NULL]
 d[, yrwk:=NULL]
 d[, x:=NULL]
+d[, granularity_time := "date"]
+
 
 # set to csfmt
 cstidy::set_csfmt_rts_data_v1(d)
@@ -36,7 +39,7 @@ d
 week <- d[,.(
   icu_with_positive_pcr_n = sum(icu_with_positive_pcr_n),
   hospitalization_with_covid19_as_primary_cause_n = sum(hospitalization_with_covid19_as_primary_cause_n),
-  granularity_time = "isoweek"
+  granularity_time = "isoyearweek"
   ),
   keyby=.(
     location_code,

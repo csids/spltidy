@@ -21,7 +21,6 @@ Imports: data.table,
     digest,
     stringr,
     methods,
-    tidyr,
     qs, 
     openssl
 Suggests: testthat,
