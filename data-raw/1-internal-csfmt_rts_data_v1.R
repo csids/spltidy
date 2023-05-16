@@ -28,6 +28,7 @@ csfmt_rts_data_v1_isoyearweek_to[, calyear := NA_integer_]
 csfmt_rts_data_v1_isoyearweek_to[, calmonth := NA_integer_]
 csfmt_rts_data_v1_isoyearweek_to[, calyearmonth := NA_character_]
 csfmt_rts_data_v1_isoyearweek_to[, date := cstime::isoyearweek_to_last_date(isoyearweek)]
+csfmt_rts_data_v1_isoyearweek_to[isoyearweek=="9999-36", date := as.Date("9999-09-12")]
 setkey(csfmt_rts_data_v1_isoyearweek_to, isoyearweek)
 
 # csfmt_rts_data_v1_isoyear_to
