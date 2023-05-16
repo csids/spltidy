@@ -22,8 +22,8 @@ csfmt_rts_data_v1_isoyearweek_to <- data.table(
 )
 csfmt_rts_data_v1_isoyearweek_to[, isoyear := cstime::isoyearweek_to_isoyear_n(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, isoweek := cstime::isoyearweek_to_isoweek_n(isoyearweek)]
-csfmt_rts_data_v1_isoyearweek_to[, season := NA_character_]
-csfmt_rts_data_v1_isoyearweek_to[, seasonweek := NA_real_]
+csfmt_rts_data_v1_isoyearweek_to[, season := cstime::isoyearweek_to_season_c(isoyearweek)]
+csfmt_rts_data_v1_isoyearweek_to[, seasonweek := cstime::isoyearweek_to_seasonweek_n(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, calyear := NA_integer_]
 csfmt_rts_data_v1_isoyearweek_to[, calmonth := NA_integer_]
 csfmt_rts_data_v1_isoyearweek_to[, calyearmonth := NA_character_]
