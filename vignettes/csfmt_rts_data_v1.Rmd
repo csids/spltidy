@@ -856,7 +856,7 @@ cstidy::generate_test_data() %>%
 
 ## Reference (Location)
 
-Locations can be obtained from [csdata](/csdata). Valid locations (and location types) are available in `csdata::nor_locations_names()`.
+Locations can be obtained from [csdata](https://www.csids.no/csdata/). Valid locations (and location types) are available in `csdata::nor_locations_names()`.
 
 Here we list as a reference table the valid `location_code`s and `location_name_description_nb`s (the two most commonly used locations).
 
