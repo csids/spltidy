@@ -10,3 +10,4 @@ dev
 ^doc$
 ^Meta$
 @eaDir
+^CRAN-SUBMISSION$

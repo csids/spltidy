@@ -1374,8 +1374,6 @@ plot.csfmt_rts_data_structure_hash_v1 <- function(x, y, ...) {
   q <- ggplot(pd, aes(x = granularity_geo, y = age, fill = category))
   q <- q + geom_tile(color = "black")
   q <- q + facet_grid(sex ~ granularity_time)
-  # q <- q + facet_wrap(~granularity_time, scales = "free")
-  # q <- q + csstyle::scale_fill_fhi(NULL, drop = F, direction = -1)
   q <- q + scale_x_discrete(NULL)
   q <- q + scale_y_discrete(NULL)
   q <- q + theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))

@@ -32,7 +32,7 @@ library(ggplot2)
 
 This document presents the data format `csfmt_rts_data_v1`.
 
-`csfmt_rts_data_v1` is the data format that the Sykdomspulsen team recommends using for the real-time surveillance of infectious diseases.
+`csfmt_rts_data_v1` is the data format that the CSIDS team recommends using for the real-time surveillance of infectious diseases.
 
 ## Style
 
