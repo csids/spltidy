@@ -1,4 +1,7 @@
-## Submission
+## Resubmission
+
+- Corrected spelling error "surveillance".
+- Corrected mismatch in S3 method.
 
 ## Test environments
 

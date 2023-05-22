@@ -849,7 +849,7 @@ assert_classes <- function(x, ...) {
   UseMethod("assert_classes", x)
 }
 
-assert_classes.csfmt_rts_data_v1 <- function(x) {
+assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
   fmt <- attr(x, "format_unified")
   classes_real <- lapply(x, class)
   classes_wanted <- lapply(fmt, function(x) {
