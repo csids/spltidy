@@ -142,11 +142,19 @@ remove_class_csfmt_rts_data <- function(x) {
 #' cstidy::generate_test_data("csfmt_rts_data_v1")
 #' @export
 generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
+  granularity_geo <- NULL
+  granularity_time <- NULL
+  isoyearweek <- NULL
+  deaths_n <- NULL
+  isoyear <- NULL
+  age <- NULL
+  sex <- NULL
+
   stopifnot(fmt %in% c("csfmt_rts_data_v1"))
 
   if (fmt == "csfmt_rts_data_v1") {
     d1 <- data.table(location_code = csdata::nor_locations_names()[granularity_geo == "county"]$location_code)
-    d1[, granularity_time := "isoweek"]
+    d1[, granularity_time := "isoyearweek"]
     d1[, isoyearweek := "2022-03"]
     d1[, deaths_n := stats::rpois(.N, 5)]
 
@@ -296,6 +304,9 @@ generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
 #' @param granularity_time The granularity of x
 #' @export
 heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
+  ..columns <- NULL
+  . <- NULL
+
   stopifnot(granularity_time %in% c("date", "isoyearweek", "isoyear"))
   if(granularity_time=="date"){
     columns <- c(
@@ -625,6 +636,10 @@ heal <- function(x, ...) {
 #' @method heal csfmt_rts_data_v1
 #' @export
 heal.csfmt_rts_data_v1 <- function(x, ...) {
+  granularity_time <- NULL
+  original_granularity_time_32423432 <- NULL
+  . <- NULL
+
   assert_classes.csfmt_rts_data_v1(x)
 
   # making sure that granularity_time is taken care of
@@ -1039,6 +1054,14 @@ validate <- function(x) {
 #' @method summary csfmt_rts_data_v1
 #' @export
 summary.csfmt_rts_data_v1 <- function(object, ...) {
+  . <- NULL
+  val <- NULL
+  len <- NULL
+  max_len <- NULL
+  n <- NULL
+  dicsay <- NULL
+  time_series_id <- NULL
+
   # validate
   validate(object)
   status <- attr(object, "status")
@@ -1147,6 +1170,13 @@ identify_data_structure <- function(x, col, ...) {
 }
 
 identify_data_structure_internal <- function(summarized, col) {
+  . <- NULL
+  num_valid <- NULL
+  num_na <- NULL
+  category <- NULL
+  age <- NULL
+  sex <- NULL
+  granularity_geo <- NULL
   # we expect a data.table with columns:
   # - granularity_time
   # - granularity_geo
@@ -1254,6 +1284,12 @@ identify_data_structure_internal <- function(summarized, col) {
 #' @method identify_data_structure csfmt_rts_data_v1
 #' @export
 identify_data_structure.csfmt_rts_data_v1 <- function(x, col, ...) {
+  . <- NULL
+  granularity_time <- NULL
+  granularity_geo <- NULL
+  age <- NULL
+  sex <- NULL
+  var <- NULL
   # col <-
   # Take in the data table
   # data <- data$cases
@@ -1279,39 +1315,13 @@ identify_data_structure.csfmt_rts_data_v1 <- function(x, col, ...) {
 
 #' @export
 "identify_data_structure.tbl_Microsoft SQL Server" <- function(x, col, ...) {
-  # col <-
-  # Take in the data table
-  # data <- data$cases
-  # data <- data$vax
-
-  summarized <- x %>%
-    dplyr::rename(col = !!col) %>%
-    dplyr::group_by(
-      granularity_time,
-      granularity_geo,
-      age,
-      sex
-    ) %>%
-    dplyr::summarize(
-      num_total = n(),
-      num_na = sum(as.numeric(is.na(col)))
-    ) %>%
-    dplyr::mutate(
-      num_valid = num_total - num_na
-    ) %>%
-    dplyr::select(-num_total) %>%
-    dplyr::collect() %>%
-    as.data.table()
-
-  identify_data_structure_internal(
-    summarized,
-    col
-  )
-}
-
-#' @method identify_data_structure tbl_Pool
-#' @export
-"identify_data_structure.tbl_Pool" <- function(x, col, ...) {
+  granularity_time <- NULL
+  granularity_geo <- NULL
+  age <- NULL
+  sex <- NULL
+  n <- NULL
+  num_total <- NULL
+  num_na <- NULL
   # col <-
   # Take in the data table
   # data <- data$cases
@@ -1345,6 +1355,11 @@ identify_data_structure.csfmt_rts_data_v1 <- function(x, col, ...) {
 #' @method plot csfmt_rts_data_structure_hash_v1
 #' @export
 plot.csfmt_rts_data_structure_hash_v1 <- function(x, y, ...) {
+  granularity_geo <- NULL
+  category <- NULL
+  age <- NULL
+  sex <- NULL
+
   # x <- generate_test_data() %>%
   #   set_csfmt_rts_data_v1() %>%
   #   identify_data_structure("deaths_n")
@@ -1398,6 +1413,8 @@ unique_time_series <- function(x, set_time_series_id = FALSE, ...) {
 #' @method unique_time_series csfmt_rts_data_v1
 #' @export
 unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, ...) {
+  time_series_id <- NULL
+
   ids <- unique(
     c(
       "granularity_time",
@@ -1488,6 +1505,12 @@ expand_time_to_max_isoyear <- function(x, max_isoyear = NULL, ...) {
 }
 
 expand_time_to_max_isoyear.csfmt_rts_data_v1 <- function(x, max_isoyear = NULL, ...) {
+  granularity_time <- NULL
+  time_series_id <- NULL
+  isoyear <- NULL
+  max_current_isoyear <- NULL
+  . <- NULL
+
   d <- copy(x[granularity_time=="isoyear"])
   if(nrow(d) == 0) return(d)
 
@@ -1534,6 +1557,12 @@ expand_time_to_max_isoyearweek <- function(x, max_isoyearweek = NULL, ...) {
 }
 
 expand_time_to_max_isoyearweek.csfmt_rts_data_v1 <- function(x, max_isoyearweek = NULL, ...) {
+  granularity_time <- NULL
+  time_series_id <- NULL
+  isoyearweek <- NULL
+  max_current_isoyearweek <- NULL
+  . <- NULL
+
   d <- copy(x[granularity_time=="isoweek"])
   if(nrow(d) == 0) return(NULL)
 
@@ -1582,6 +1611,11 @@ expand_time_to_max_date <- function(x, max_date = NULL, ...) {
 }
 
 expand_time_to_max_date.csfmt_rts_data_v1 <- function(x, max_date = NULL, ...) {
+  granularity_time <- NULL
+  time_series_id <- NULL
+  max_current_date <- NULL
+  . <- NULL
+
   d <- copy(x[granularity_time=="day"])
   if(nrow(d) == 0) return(NULL)
 
@@ -1626,23 +1660,23 @@ expand_time_to_max_date.csfmt_rts_data_v1 <- function(x, max_date = NULL, ...) {
 
 
 
-#' Epicurve
-#' @param x Dataset
-#' @param ... X
-#' @examples
-#' csstyle::plot_epicurve(cstidy::nor_covid19_cases_by_time_location_csfmt_rts_v1[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
-#' @importFrom csstyle plot_epicurve
-#' @method plot_epicurve csfmt_rts_data_v1
-#' @export
-plot_epicurve.csfmt_rts_data_v1 <- function(
-  x,
-  ...
-  ) {
-
-  print("HELLO")
-
-}
-
+# #' Epicurve
+# #' @param x Dataset
+# #' @param ... X
+# #' @examples
+# #' csstyle::plot_epicurve(cstidy::nor_covid19_cases_by_time_location_csfmt_rts_v1[location_code == "county03"], type = "single", var_y = "covid19_cases_testdate_n")
+# #' @importFrom csstyle plot_epicurve
+# #' @method plot_epicurve csfmt_rts_data_v1
+# #' @export
+# plot_epicurve.csfmt_rts_data_v1 <- function(
+#   x,
+#   ...
+#   ) {
+#
+#   print("HELLO")
+#
+# }
+#
 
 
 

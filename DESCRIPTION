@@ -1,10 +1,10 @@
 Package: cstidy
-Title: Helpful functions for cleaning data
-Version: 2023.4.24
+Title: Helpful Functions for Cleaning Surveillance Data
+Version: 2023.5.22
 Authors@R: c(
   person(c("Richard","Aubrey"), "White", email = "hello@rwhite.no", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6747-1726"))
   )
-Description: Helpful functions for cleaning data.
+Description: Helpful functions for the cleaning and manipulation of surveillance data, especially with regards to the creation and validation of panel data from individual level surviellance data.
 Depends: R (>= 3.3.0)
 License: MIT + file LICENSE
 URL: https://www.csids.no/cstidy/, https://github.com/csids/cstidy
@@ -15,7 +15,6 @@ Imports: data.table,
     magrittr,
     ggplot2,
     csdata,
-    csstyle,
     cstime,
     crayon,
     digest,
