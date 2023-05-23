@@ -108,12 +108,7 @@ d
 # Collapsing down to different levels, and healing the dataset 
 # (so that it can be worked on further with regards to real time surveillance)
 d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby=.(granularity_time)] %>%
-  cstidy::create_unified_columns() %>%
-  print()
-
-# Collapsing down to different levels, without healing the dataset and without
-# removing the class csfmt_rts_data_v1 (this is uncommon)
-d[, .(deaths_n = sum(deaths_n), location_code = "norge"), keyby=.(granularity_time)] %>%
+  cstidy::set_csfmt_rts_data_v1(create_unified_columns = FALSE) %>%
   print()
 
 # Collapsing to different levels, and removing the class csfmt_rts_data_v1 because

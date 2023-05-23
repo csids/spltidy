@@ -11,3 +11,5 @@ dev
 ^Meta$
 @eaDir
 ^CRAN-SUBMISSION$
+vignettes/_PRECOMPILER.R
+^orig$

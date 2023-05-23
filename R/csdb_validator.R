@@ -1,6 +1,7 @@
-#' validator_field_types_csfmt_rts_data_v1
+#' Field types validator (csfmt_rts_data_v1)
 #' An example (schema) validator of field_types used in csfmt_rts_data_v1
 #' @param db_field_types db_field_types passed to schema
+#' @returns Boolean, corresponding to where or not the validator is passed.
 #' @export
 csdb_validator_field_types_csfmt_rts_data_v1 <- function(db_field_types) {
   if (!inherits(db_field_types, "character")) {
@@ -36,9 +37,10 @@ csdb_validator_field_types_csfmt_rts_data_v1 <- function(db_field_types) {
   return(TRUE)
 }
 
-#' validator_field_contents_csfmt_rts_data_v1
+#' #' Field contents validator (csfmt_rts_data_v1)
 #' An example (schema) validator of database data used in csfmt_rts_data_v1
 #' @param data data passed to schema
+#' @returns Boolean, corresponding to where or not the validator is passed.
 #' @export
 csdb_validator_field_contents_csfmt_rts_data_v1 <- function(data) {
   for (i in unique(data$granularity_time)) {

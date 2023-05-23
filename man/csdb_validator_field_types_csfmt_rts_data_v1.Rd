@@ -2,7 +2,7 @@
 % Please edit documentation in R/csdb_validator.R
 \name{csdb_validator_field_types_csfmt_rts_data_v1}
 \alias{csdb_validator_field_types_csfmt_rts_data_v1}
-\title{validator_field_types_csfmt_rts_data_v1
+\title{Field types validator (csfmt_rts_data_v1)
 An example (schema) validator of field_types used in csfmt_rts_data_v1}
 \usage{
 csdb_validator_field_types_csfmt_rts_data_v1(db_field_types)
@@ -10,7 +10,10 @@ csdb_validator_field_types_csfmt_rts_data_v1(db_field_types)
 \arguments{
 \item{db_field_types}{db_field_types passed to schema}
 }
+\value{
+Boolean, corresponding to where or not the validator is passed.
+}
 \description{
-validator_field_types_csfmt_rts_data_v1
+Field types validator (csfmt_rts_data_v1)
 An example (schema) validator of field_types used in csfmt_rts_data_v1
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/csdb_validator.R
 \name{csdb_validator_field_contents_csfmt_rts_data_v1}
 \alias{csdb_validator_field_contents_csfmt_rts_data_v1}
-\title{validator_field_contents_csfmt_rts_data_v1
+\title{#' Field contents validator (csfmt_rts_data_v1)
 An example (schema) validator of database data used in csfmt_rts_data_v1}
 \usage{
 csdb_validator_field_contents_csfmt_rts_data_v1(data)
@@ -10,7 +10,10 @@ csdb_validator_field_contents_csfmt_rts_data_v1(data)
 \arguments{
 \item{data}{data passed to schema}
 }
+\value{
+Boolean, corresponding to where or not the validator is passed.
+}
 \description{
-validator_field_contents_csfmt_rts_data_v1
+#' Field contents validator (csfmt_rts_data_v1)
 An example (schema) validator of database data used in csfmt_rts_data_v1
 }

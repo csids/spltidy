@@ -123,6 +123,7 @@ formats$csfmt_rts_data_v1$unified$date <- list(
 #' cstidy::remove_class_csfmt_rts_data(x)
 #' class(x)
 #' @family csfmt_rts_data
+#' @returns No return value, called for the side effect of removing the csfmt_rts_data class from x.
 #' @export
 remove_class_csfmt_rts_data <- function(x) {
   classes <- class(x)
@@ -140,6 +141,7 @@ remove_class_csfmt_rts_data <- function(x) {
 #' @param fmt Data format (\code{csfmt_rts_data_v1})
 #' @examples
 #' cstidy::generate_test_data("csfmt_rts_data_v1")
+#' @returns A dataset containing fake data in the requested format.
 #' @export
 generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
   granularity_geo <- NULL
@@ -297,11 +299,11 @@ generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
 #   csutil::apply_fn_via_hash_table(x, heal_time_csfmt_rts_data_v1_internal, cols=cols, from=from)
 # }
 
-
-#' Heals time
-#' @param x The timepoints that need healing
-#' @param cols The columns that should be returned
-#' @param granularity_time The granularity of x
+#' Provides corresponding healed times
+#' @param x A vector containing either dates, isoyearweek, or isoyear.
+#' @param cols Columns to restrict the output to.
+#' @param granularity_time date, isoyearweek, or isoyear, depending on the values contained in x.
+#' @returns A dataset with time columns corresponding to the values given in x.
 #' @export
 heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
   ..columns <- NULL
@@ -370,6 +372,7 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
 }
 
 #' @method [ csfmt_rts_data_v1
+#' @returns No return value, called for side effect of assigning values in a column.
 #' @export
 "[.csfmt_rts_data_v1" <- function(x, ...) {
   # original call
@@ -578,64 +581,10 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
   }
 }
 
-#' Impute missing values
-#'
-#' @description
-#' Tries to impute missing values by performing smart assignment on all columns that are missing data.
-#' E.g. if \code{location_code='norge'} then we know that \code{granularity_geo='nation'}.
-#'
-#' @section csfmt_rts_data_v1:
-#' The **columns in bold** will be used to impute the listed columns.
-#'
-#' **location_code**:
-#' - granularity_geo
-#' - country_iso3
-#'
-#' **isoyear** (when `granularity_time=="isoyear"`):
-#' - isoweek
-#' - isoyearweek
-#' - season
-#' - seasonweek
-#' - calyear
-#' - calmonth
-#' - calyearmonth
-#' - date
-#'
-#' **isoyearweek** (when `granularity_time=="isoyearweek"`):
-#' - isoyear
-#' - isoweek
-#' - season
-#' - seasonweek
-#' - calyear
-#' - calmonth
-#' - calyearmonth
-#' - date
-#'
-#' **date** (when `granularity_time=="date"`):
-#' - isoyear
-#' - isoweek
-#' - isoyearweek
-#' - season
-#' - seasonweek
-#' - calyear
-#' - calmonth
-#' - calyearmonth
-#'
-#' With regards to the time columns, `granularity_time` takes precedence over everything.
-#' If `granularity_time` is missing, then we try to impute `granularity_time` by seeing if
-#' there is only one time column with non-missing data. Due to the multitude of time columns,
-#' `granularity_time` is an extremely important column and should always be kept with valid values.
-#'
-#' @param x An object of type \code{\link{csfmt_rts_data_v1}}
-#' @param ... Not used.
-#' @family csfmt_rts_data
-#' @export
 heal <- function(x, ...) {
   UseMethod("heal", x)
 }
 
-#' @method heal csfmt_rts_data_v1
-#' @export
 heal.csfmt_rts_data_v1 <- function(x, ...) {
   granularity_time <- NULL
   original_granularity_time_32423432 <- NULL
@@ -790,43 +739,10 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
   return(invisible(x))
 }
 
-#' Create unified columns
-#'
-#' @description
-#' Creates the pre-specified unified columns for some data formats.
-#'
-#' @section csfmt_rts_data_v1:
-#' \code{csfmt_rts_data_v1} contains 16 unified columns:
-#' - granularity_time
-#' - granularity_geo
-#' - country_iso3
-#' - location_code
-#' - border
-#' - age
-#' - sex
-#' - isoyear
-#' - isoweek
-#' - isoyearweek
-#' - season
-#' - seasonweek
-#' - calyear
-#' - calmonth
-#' - calyearmonth
-#' - date
-#'
-#' For more details see the vignette:
-#' \code{vignette("csfmt_rts_data_v1", package = "cstidy")}
-#'
-#' @param x An object of type \code{\link{csfmt_rts_data_v1}}
-#' @param ... Arguments passed to or from other methods
-#' @family csfmt_rts_data
-#' @export
 create_unified_columns <- function(x, ...) {
   UseMethod("create_unified_columns", x)
 }
 
-#' @method create_unified_columns csfmt_rts_data_v1
-#' @export
 create_unified_columns.csfmt_rts_data_v1 <- function(x, ...) {
   fmt <- attr(x, "format_unified")
   for (i in names(fmt)) {
@@ -950,8 +866,8 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' @return An extended \code{data.table}, which has been modified by reference and returned (invisibly).
 #'
 #' @param x The data.table to be converted to csfmt_rts_data_v1
-#' @param create_unified_columns Do you want it to \code{\link{create_unified_columns}}?
-#' @param heal Do you want to \code{\link{heal}} on creation?
+#' @param create_unified_columns Do you want it to create unified columns?
+#' @param heal Do you want to impute missing values on creation?
 #' @examples
 #' # Create some fake data as data.table
 #' d <- cstidy::generate_test_data(fmt = "csfmt_rts_data_v1")
@@ -982,6 +898,7 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #'   cstidy::set_csfmt_rts_data_v1() %>%
 #'   summary()
 #' @family csfmt_rts_data
+#' @returns No return value, called for side effect of replacing the current data.table with a csfmt_rts_data_v1 in place.
 #' @export
 set_csfmt_rts_data_v1 <- function(x, create_unified_columns = TRUE, heal = TRUE) {
   if (!is.data.table(x)) {
@@ -1004,6 +921,7 @@ set_csfmt_rts_data_v1 <- function(x, create_unified_columns = TRUE, heal = TRUE)
 }
 
 #' @rdname set_csfmt_rts_data_v1
+#' @returns Returns a duplicated csfmt_rts_data_v1.
 #' @export
 csfmt_rts_data_v1 <- function(x, create_unified_columns = TRUE, heal = TRUE) {
   y <- copy(x)
@@ -1053,6 +971,7 @@ validate <- function(x) {
 }
 
 #' @method summary csfmt_rts_data_v1
+#' @returns No return value, called for side effect of printing a summary of the object.
 #' @export
 summary.csfmt_rts_data_v1 <- function(object, ...) {
   . <- NULL
@@ -1165,6 +1084,8 @@ summary.csfmt_rts_data_v1 <- function(object, ...) {
 #'   cstidy::identify_data_structure("deaths_n") %>%
 #'   plot()
 #' @family csfmt_rts_data
+#' @returns Returns a csfmt_rts_data_structure_hash_v1 summary object.
+#' @rdname identify_data_structure
 #' @export
 identify_data_structure <- function(x, col, ...) {
   UseMethod("identify_data_structure", x)
@@ -1283,6 +1204,7 @@ identify_data_structure_internal <- function(summarized, col) {
 }
 
 #' @method identify_data_structure csfmt_rts_data_v1
+#' @rdname identify_data_structure
 #' @export
 identify_data_structure.csfmt_rts_data_v1 <- function(x, col, ...) {
   . <- NULL
@@ -1314,6 +1236,7 @@ identify_data_structure.csfmt_rts_data_v1 <- function(x, col, ...) {
   )
 }
 
+#' @rdname identify_data_structure
 #' @export
 "identify_data_structure.tbl_Microsoft SQL Server" <- function(x, col, ...) {
   granularity_time <- NULL
@@ -1403,6 +1326,7 @@ plot.csfmt_rts_data_structure_hash_v1 <- function(x, y, ...) {
 #' @param x An object of type \code{\link{csfmt_rts_data_v1}}
 #' @param set_time_series_id If TRUE, then `x` will have a new column called 'time_series_id'
 #' @param ... Not used.
+#' @returns A dataset that lists all the unique time series in x.
 #' @family csfmt_rts_data
 #' @export
 unique_time_series <- function(x, set_time_series_id = FALSE, ...) {
@@ -1432,7 +1356,7 @@ unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, 
     unique() %>%
     remove_class_csfmt_rts_data()
 
-  # return the old stuff
+  # don't do anything, if "time_series_id" already exists in x
   if("time_series_id" %in% names(retval)){
     return(retval)
   }
@@ -1440,10 +1364,8 @@ unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, 
   retval[, time_series_id := 1:.N]
   if(set_time_series_id){
     x[retval, on = ids, time_series_id := time_series_id]
+    data.table::shouldPrint(x)
   }
-
-  # allows us to print
-  data.table::shouldPrint(x)
 
   return(retval)
 }
@@ -1469,6 +1391,7 @@ unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, 
 #' @param max_isoyearweek Maximum isoyearweek
 #' @param max_date Maximum date
 #' @param ... Not used.
+#' @returns A larger dataset that includes more rows corresponding to more time.
 #' @family csfmt_rts_data
 #' @export
 expand_time_to <- function(x, max_isoyear = NULL, max_isoyearweek = NULL, max_date = NULL, ...) {

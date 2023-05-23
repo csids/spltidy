@@ -20,9 +20,7 @@ Imports: data.table,
     crayon,
     digest,
     stringr,
-    methods,
-    qs, 
-    openssl
+    methods
 Suggests: testthat,
     knitr,
     rmarkdown,
