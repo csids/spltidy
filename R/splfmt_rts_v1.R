@@ -305,6 +305,7 @@ generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
 #' @export
 heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
   ..columns <- NULL
+  rm("..columns")
   . <- NULL
 
   stopifnot(granularity_time %in% c("date", "isoyearweek", "isoyear"))
