@@ -600,7 +600,7 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
 #' - calyearmonth
 #' - date
 #'
-#' **isoyearweek** (when `granularity_time=="isoweek"`):
+#' **isoyearweek** (when `granularity_time=="isoyearweek"`):
 #' - isoyear
 #' - isoweek
 #' - season
@@ -610,7 +610,7 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
 #' - calyearmonth
 #' - date
 #'
-#' **date** (when `granularity_time=="day"`):
+#' **date** (when `granularity_time=="date"`):
 #' - isoyear
 #' - isoweek
 #' - isoyearweek
@@ -1561,7 +1561,7 @@ expand_time_to_max_isoyearweek.csfmt_rts_data_v1 <- function(x, max_isoyearweek 
   max_current_isoyearweek <- NULL
   . <- NULL
 
-  d <- copy(x[granularity_time=="isoweek"])
+  d <- copy(x[granularity_time=="isoyearweek"])
   if(nrow(d) == 0) return(NULL)
 
   if(!"time_series_id" %in% names(d)){
@@ -1614,7 +1614,7 @@ expand_time_to_max_date.csfmt_rts_data_v1 <- function(x, max_date = NULL, ...) {
   max_current_date <- NULL
   . <- NULL
 
-  d <- copy(x[granularity_time=="day"])
+  d <- copy(x[granularity_time=="date"])
   if(nrow(d) == 0) return(NULL)
 
   if(!"time_series_id" %in% names(d)){

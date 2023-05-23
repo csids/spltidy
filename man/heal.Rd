@@ -37,7 +37,7 @@ The \strong{columns in bold} will be used to impute the listed columns.
 \item date
 }
 
-\strong{isoyearweek} (when \code{granularity_time=="isoweek"}):
+\strong{isoyearweek} (when \code{granularity_time=="isoyearweek"}):
 \itemize{
 \item isoyear
 \item isoweek
@@ -49,7 +49,7 @@ The \strong{columns in bold} will be used to impute the listed columns.
 \item date
 }
 
-\strong{date} (when \code{granularity_time=="day"}):
+\strong{date} (when \code{granularity_time=="date"}):
 \itemize{
 \item isoyear
 \item isoweek
