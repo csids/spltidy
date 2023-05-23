@@ -10,7 +10,7 @@ generate_test_data(fmt = "csfmt_rts_data_v1")
 \item{fmt}{Data format (\code{csfmt_rts_data_v1})}
 }
 \value{
-A dataset containing fake data in the requested format.
+csfmt_rts_data_v1, a dataset containing fake data.
 }
 \description{
 Generates some test data

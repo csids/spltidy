@@ -14,7 +14,7 @@ heal_time_csfmt_rts_data_v1(x, cols, granularity_time = "date")
 \item{granularity_time}{date, isoyearweek, or isoyear, depending on the values contained in x.}
 }
 \value{
-A dataset with time columns corresponding to the values given in x.
+data.table, a dataset with time columns corresponding to the values given in x.
 }
 \description{
 Provides corresponding healed times

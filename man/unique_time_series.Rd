@@ -14,7 +14,7 @@ unique_time_series(x, set_time_series_id = FALSE, ...)
 \item{...}{Not used.}
 }
 \value{
-A dataset that lists all the unique time series in x.
+data.table, a dataset that lists all the unique time series in x.
 }
 \description{
 Attempts to identify the unique time series that exist in this dataset.

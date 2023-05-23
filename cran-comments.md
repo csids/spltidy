@@ -1,7 +1,7 @@
 ## Resubmission
 
-- Corrected spelling error "surveillance".
-- Corrected mismatch in S3 method.
+- All functions now have a \value in their .Rd files
+- vignettes/_PRECOMPILER.R is now removed from the package (via inclusion in .RBuildignore)
 
 ## Test environments
 

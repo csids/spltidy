@@ -141,7 +141,7 @@ remove_class_csfmt_rts_data <- function(x) {
 #' @param fmt Data format (\code{csfmt_rts_data_v1})
 #' @examples
 #' cstidy::generate_test_data("csfmt_rts_data_v1")
-#' @returns A dataset containing fake data in the requested format.
+#' @returns csfmt_rts_data_v1, a dataset containing fake data.
 #' @export
 generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
   granularity_geo <- NULL
@@ -303,7 +303,7 @@ generate_test_data <- function(fmt = "csfmt_rts_data_v1") {
 #' @param x A vector containing either dates, isoyearweek, or isoyear.
 #' @param cols Columns to restrict the output to.
 #' @param granularity_time date, isoyearweek, or isoyear, depending on the values contained in x.
-#' @returns A dataset with time columns corresponding to the values given in x.
+#' @returns data.table, a dataset with time columns corresponding to the values given in x.
 #' @export
 heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
   ..columns <- NULL
@@ -1084,7 +1084,7 @@ summary.csfmt_rts_data_v1 <- function(object, ...) {
 #'   cstidy::identify_data_structure("deaths_n") %>%
 #'   plot()
 #' @family csfmt_rts_data
-#' @returns Returns a csfmt_rts_data_structure_hash_v1 summary object.
+#' @returns csfmt_rts_data_structure_hash_v1, a summary object.
 #' @rdname identify_data_structure
 #' @export
 identify_data_structure <- function(x, col, ...) {
@@ -1326,7 +1326,7 @@ plot.csfmt_rts_data_structure_hash_v1 <- function(x, y, ...) {
 #' @param x An object of type \code{\link{csfmt_rts_data_v1}}
 #' @param set_time_series_id If TRUE, then `x` will have a new column called 'time_series_id'
 #' @param ... Not used.
-#' @returns A dataset that lists all the unique time series in x.
+#' @returns data.table, a dataset that lists all the unique time series in x.
 #' @family csfmt_rts_data
 #' @export
 unique_time_series <- function(x, set_time_series_id = FALSE, ...) {
@@ -1355,6 +1355,7 @@ unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, 
   retval <- x[, ids, with=F] %>%
     unique() %>%
     remove_class_csfmt_rts_data()
+  data.table::shouldPrint(retval)
 
   # don't do anything, if "time_series_id" already exists in x
   if("time_series_id" %in% names(retval)){
@@ -1391,7 +1392,7 @@ unique_time_series.csfmt_rts_data_v1 <- function(x, set_time_series_id = FALSE, 
 #' @param max_isoyearweek Maximum isoyearweek
 #' @param max_date Maximum date
 #' @param ... Not used.
-#' @returns A larger dataset that includes more rows corresponding to more time.
+#' @returns csfmt_rts_data_v1, a larger dataset that includes more rows corresponding to more time.
 #' @family csfmt_rts_data
 #' @export
 expand_time_to <- function(x, max_isoyear = NULL, max_isoyearweek = NULL, max_date = NULL, ...) {

@@ -20,7 +20,7 @@ identify_data_structure(x, col, ...)
 \item{...}{Arguments passed to or from other methods}
 }
 \value{
-Returns a csfmt_rts_data_structure_hash_v1 summary object.
+csfmt_rts_data_structure_hash_v1, a summary object.
 }
 \description{
 Reduces the data structure of a column inside a dataset into something that describes

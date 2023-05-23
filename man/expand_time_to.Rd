@@ -24,7 +24,7 @@ expand_time_to(
 \item{...}{Not used.}
 }
 \value{
-A larger dataset that includes more rows corresponding to more time.
+csfmt_rts_data_v1, a larger dataset that includes more rows corresponding to more time.
 }
 \description{
 Attempts to expand the dataset to include more time

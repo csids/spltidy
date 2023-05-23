@@ -37,7 +37,7 @@ csdb_validator_field_types_csfmt_rts_data_v1 <- function(db_field_types) {
   return(TRUE)
 }
 
-#' #' Field contents validator (csfmt_rts_data_v1)
+#' Field contents validator (csfmt_rts_data_v1)
 #' An example (schema) validator of database data used in csfmt_rts_data_v1
 #' @param data data passed to schema
 #' @returns Boolean, corresponding to where or not the validator is passed.
