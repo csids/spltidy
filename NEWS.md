@@ -1,6 +1,6 @@
 # Version 2023.12.28
 
-- Inclusion of isoquarter and isoyearquarter
+- Inclusion of isoquarter and isoyearquarter in csfmt_rts_data_v2
 
 # Version 2023.5.22
 
