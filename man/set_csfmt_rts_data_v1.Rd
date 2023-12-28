@@ -48,6 +48,8 @@ When the \strong{variables in bold} are assigned using \verb{:=}, the listed var
 \item granularity_time
 \item isoweek
 \item isoyearweek
+\item isoquarter
+\item isoyearquarter
 \item season
 \item seasonweek
 \item calyear
@@ -61,6 +63,8 @@ When the \strong{variables in bold} are assigned using \verb{:=}, the listed var
 \item granularity_time
 \item isoyear
 \item isoweek
+\item isoquarter
+\item isoyearquarter
 \item season
 \item seasonweek
 \item calyear
@@ -75,6 +79,8 @@ When the \strong{variables in bold} are assigned using \verb{:=}, the listed var
 \item isoyear
 \item isoweek
 \item isoyearweek
+\item isoquarter
+\item isoyearquarter
 \item season
 \item seasonweek
 \item calyear
@@ -97,6 +103,8 @@ When the \strong{variables in bold} are assigned using \verb{:=}, the listed var
 \item isoyear
 \item isoweek
 \item isoyearweek
+\item isoquarter
+\item isoyearquarter
 \item season
 \item seasonweek
 \item calyear

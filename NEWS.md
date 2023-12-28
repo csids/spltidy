@@ -1,3 +1,7 @@
+# Version 2023.12.28
+
+- Inclusion of isoquarter and isoyearquarter
+
 # Version 2023.5.22
 
 - CRAN Submission.

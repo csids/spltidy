@@ -8,6 +8,8 @@ csfmt_rts_data_v1_date_to <- data.table(
 csfmt_rts_data_v1_date_to[, isoyear := cstime::date_to_isoyear_n(date)]
 csfmt_rts_data_v1_date_to[, isoweek := cstime::date_to_isoweek_n(date)]
 csfmt_rts_data_v1_date_to[, isoyearweek := cstime::date_to_isoyearweek_c(date)]
+csfmt_rts_data_v1_date_to[, isoquarter := cstime::date_to_isoquarter_n(date)]
+csfmt_rts_data_v1_date_to[, isoyearquarter := cstime::date_to_isoyearquarter_c(date)]
 csfmt_rts_data_v1_date_to[, season := cstime::date_to_season_c(date)]
 csfmt_rts_data_v1_date_to[, seasonweek := cstime::date_to_seasonweek_n(date)]
 csfmt_rts_data_v1_date_to[, calyear := cstime::date_to_calyear_n(date)]
@@ -22,6 +24,8 @@ csfmt_rts_data_v1_isoyearweek_to <- data.table(
 )
 csfmt_rts_data_v1_isoyearweek_to[, isoyear := cstime::isoyearweek_to_isoyear_n(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, isoweek := cstime::isoyearweek_to_isoweek_n(isoyearweek)]
+csfmt_rts_data_v1_isoyearweek_to[, isoquarter := cstime::isoyearweek_to_isoquarter_n(isoyearweek)]
+csfmt_rts_data_v1_isoyearweek_to[, isoyearquarter := cstime::isoyearweek_to_isoyearquarter_c(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, season := cstime::isoyearweek_to_season_c(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, seasonweek := cstime::isoyearweek_to_seasonweek_n(isoyearweek)]
 csfmt_rts_data_v1_isoyearweek_to[, calyear := NA_integer_]
@@ -38,6 +42,8 @@ csfmt_rts_data_v1_isoyear_to <- data.table(
 )
 csfmt_rts_data_v1_isoyear_to[, isoweek := cstime::isoyear_to_last_isoweek_n(isoyear)]
 csfmt_rts_data_v1_isoyear_to[, isoyearweek := cstime::isoyear_to_last_isoyearweek_c(isoyear)]
+csfmt_rts_data_v1_isoyear_to[, isoquarter := NA_integer_]
+csfmt_rts_data_v1_isoyear_to[, isoyearquarter := NA_character_]
 csfmt_rts_data_v1_isoyear_to[, season := NA_character_]
 csfmt_rts_data_v1_isoyear_to[, seasonweek := NA_real_]
 csfmt_rts_data_v1_isoyear_to[, calyear := NA_integer_]

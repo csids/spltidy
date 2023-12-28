@@ -72,6 +72,20 @@ formats$csfmt_rts_data_v1$unified$isoyearweek <- list(
   class = "character"
 )
 
+formats$csfmt_rts_data_v1$unified$isoquarter <- list(
+  NA_allowed = TRUE,
+  NA_class = NA_integer_,
+  values_allowed = NULL,
+  class = "integer"
+)
+
+formats$csfmt_rts_data_v1$unified$isoyearquarter <- list(
+  NA_allowed = FALSE,
+  NA_class = NA_character_,
+  values_allowed = NULL,
+  class = "character"
+)
+
 formats$csfmt_rts_data_v1$unified$season <- list(
   NA_allowed = TRUE,
   NA_class = NA_character_,
@@ -317,6 +331,8 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
       "isoyear",
       "isoweek",
       "isoyearweek",
+      "isoquarter",
+      "isoyearquarter",
       "season",
       "seasonweek",
       "calyear",
@@ -335,6 +351,8 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
       "granularity_time",
       "isoyear",
       "isoweek",
+      "isoquarter",
+      "isoyearquarter",
       "season",
       "seasonweek",
       "calyear",
@@ -434,46 +452,12 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
       }
 
       if (time_var_modified == "isoyear") {
-        # healing_options <- list(
-        #   "granularity_time" = "\"isoyear\"",
-        #   "isoweek" = "cstime::isoyear_to_last_isoweek_n(isoyear)",
-        #   "isoyearweek" = "cstime::isoyear_to_last_isoyearweek_c(isoyear)",
-        #   "season" = "NA_character_",
-        #   "seasonweek" = "NA_real_",
-        #   "calyear" = "NA_integer_",
-        #   "calmonth" = "NA_integer_",
-        #   "calyearmonth" = "NA_character_",
-        #   "date" = "cstime::isoyear_to_last_date(isoyear)"
-        # )
         healing_options <- names(heal_time_csfmt_rts_data_v1(2020, names(x), granularity_time="isoyear"))
         healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(isoyear, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"isoyear\")')
       } else if (time_var_modified == "isoyearweek") {
-        # healing_options <- list(
-        #   "granularity_time" = "\"isoweek\"",
-        #   "isoyear" = "cstime::isoyearweek_to_isoyear_n(isoyearweek)",
-        #   "isoweek" = "cstime::isoyearweek_to_isoweek_n(isoyearweek)",
-        #   "season" = "cstime::isoyearweek_to_season_c(isoyearweek)",
-        #   "seasonweek" = "cstime::isoyearweek_to_seasonweek_n(isoyearweek)",
-        #   "calyear" = "NA_integer_",
-        #   "calmonth" = "NA_integer_",
-        #   "calyearmonth" = "NA_character_",
-        #   "date" = "cstime::isoyearweek_to_last_date(isoyearweek)"
-        # )
         healing_options <- names(heal_time_csfmt_rts_data_v1("2020-01", names(x), granularity_time="isoyearweek"))
         healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(isoyearweek, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"isoyearweek\")')
-
       } else if (time_var_modified == "date") {
-        # healing_options <- list(
-        #   "granularity_time" = "\"day\"",
-        #   "isoyear" = "cstime::date_to_isoyear_n(date)",
-        #   "isoweek" = "cstime::date_to_isoweek_n(date)",
-        #   "isoyearweek" = "cstime::date_to_isoyearweek_c(date)",
-        #   "season" = "cstime::date_to_season_c(date)",
-        #   "seasonweek" = "cstime::date_to_seasonweek_n(date)",
-        #   "calyear" = "cstime::date_to_calyear_n(date)",
-        #   "calmonth" = "cstime::date_to_calmonth_n(date)",
-        #   "calyearmonth" = "cstime::date_to_calyearmonth_c(date)"
-        # )
         healing_options <- names(heal_time_csfmt_rts_data_v1(as.Date("2020-01-01"), names(x), granularity_time="date"))
         healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v1(date, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"date\")')
       } else {
@@ -481,18 +465,6 @@ heal_time_csfmt_rts_data_v1 <- function(x, cols, granularity_time = "date"){
         healing_function <- NULL
       }
 
-      # if (!is.null(healing_options)) {
-      #   healing_options <- healing_options[names(healing_options) %in% names(x)]
-      #   if (length(healing_options) > 0) {
-      #     healing_calls[[length(healing_calls) + 1]] <- glue::glue(
-      #       '{orig_call[[2]]}[!is.na(x_modified_timevar_97531),
-      #       c("{paste0(names(healing_options), collapse="\\",\\"")}")
-      #       :=
-      #       .({paste0(healing_options, collapse=",")})
-      #       ]'
-      #     )
-      #   }
-      # }
       if (!is.null(healing_options)) {
         healing_calls[[length(healing_calls) + 1]] <- glue::glue(
           '{orig_call[[2]]}[!is.na(x_modified_timevar_97531),
@@ -628,6 +600,8 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
     "isoyear",
     "isoweek",
     "isoyearweek",
+    "isoquarter",
+    "isoyearquarter",
     "season",
     "seasonweek",
     "calyear",
@@ -670,6 +644,8 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
     "isoyear" = c(
       "isoweek",
       "isoyearweek",
+      "isoquarter",
+      "isoyearquarter",
       "season",
       "seasonweek",
       "calyear",
@@ -680,6 +656,8 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
     "isoyearweek" = c(
       "isoyear",
       "isoweek",
+      "isoquarter",
+      "isoyearquarter",
       "season",
       "seasonweek",
       "calyear",
@@ -691,6 +669,8 @@ heal.csfmt_rts_data_v1 <- function(x, ...) {
       "isoyear",
       "isoweek",
       "isoyearweek",
+      "isoquarter",
+      "isoyearquarter",
       "season",
       "seasonweek",
       "calyear",
@@ -811,6 +791,8 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' - granularity_time
 #' - isoweek
 #' - isoyearweek
+#' - isoquarter
+#' - isoyearquarter
 #' - season
 #' - seasonweek
 #' - calyear
@@ -822,6 +804,8 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' - granularity_time
 #' - isoyear
 #' - isoweek
+#' - isoquarter
+#' - isoyearquarter
 #' - season
 #' - seasonweek
 #' - calyear
@@ -834,6 +818,8 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' - isoyear
 #' - isoweek
 #' - isoyearweek
+#' - isoquarter
+#' - isoyearquarter
 #' - season
 #' - seasonweek
 #' - calyear
@@ -852,6 +838,8 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' - isoyear
 #' - isoweek
 #' - isoyearweek
+#' - isoquarter
+#' - isoyearquarter
 #' - season
 #' - seasonweek
 #' - calyear
