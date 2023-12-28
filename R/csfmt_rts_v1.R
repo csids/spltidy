@@ -739,8 +739,6 @@ assert_classes.csfmt_rts_data_v1 <- function(x, ...) {
 #' - calyearmonth
 #' - date
 #'
-#' @details
-#'
 #' @return An extended \code{data.table}, which has been modified by reference and returned (invisibly).
 #'
 #' @param x The data.table to be converted to csfmt_rts_data_v1
