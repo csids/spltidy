@@ -1,3 +1,7 @@
+# Version 2024.6.13
+
+- Inclusion of season in csfmt_rts_data_v2
+
 # Version 2023.12.28
 
 - Inclusion of isoquarter and isoyearquarter in csfmt_rts_data_v2
