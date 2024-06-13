@@ -3,7 +3,7 @@ formats$csfmt_rts_data_v2$unified <- list()
 formats$csfmt_rts_data_v2$unified$granularity_time <- list(
   NA_allowed = FALSE,
   NA_class = NA_character_,
-  values_allowed = c("date", "isoyearweek", "isoyear"),
+  values_allowed = c("date", "isoyearweek", "isoyear", "season"),
   class = "character"
 )
 
@@ -262,7 +262,7 @@ heal_time_csfmt_rts_data_v2 <- function(x, cols, granularity_time = "date"){
   rm("..columns")
   . <- NULL
 
-  stopifnot(granularity_time %in% c("date", "isoyearweek", "isoyear"))
+  stopifnot(granularity_time %in% c("date", "season", "isoyearweek", "isoyear"))
   if(granularity_time=="date"){
     columns <- c(
       "granularity_time",
@@ -280,6 +280,27 @@ heal_time_csfmt_rts_data_v2 <- function(x, cols, granularity_time = "date"){
     columns <- columns[columns %in% cols]
     return(
       csfmt_rts_data_v2_date_to[
+        .(x),
+        ..columns
+      ]
+    )
+  } else if(granularity_time=="season"){
+    columns <- c(
+      "granularity_time",
+      "isoyear",
+      "isoweek",
+      "isoyearweek",
+      "isoquarter",
+      "isoyearquarter",
+      "seasonweek",
+      "calyear",
+      "calmonth",
+      "calyearmonth",
+      "date"
+    )
+    columns <- columns[columns %in% cols]
+    return(
+      csfmt_rts_data_v2_season_to[
         .(x),
         ..columns
       ]
@@ -365,7 +386,7 @@ heal_time_csfmt_rts_data_v2 <- function(x, cols, granularity_time = "date"){
     lhs <- unlist(lapply(orig_call[[i]][[2]], function(x) {
       deparse(x)
     }))
-    time_vars <- c("isoyear", "isoyearweek", "date")
+    time_vars <- c("isoyear", "isoyearweek", "season", "date")
     time_vars_with_quotes <- c(time_vars, paste0("\"", time_vars, "\""))
     time_var_modified_index <- which(lhs %in% time_vars_with_quotes)
 
@@ -395,6 +416,9 @@ heal_time_csfmt_rts_data_v2 <- function(x, cols, granularity_time = "date"){
       } else if (time_var_modified == "isoyearweek") {
         healing_options <- names(heal_time_csfmt_rts_data_v2("2020-01", names(x), granularity_time="isoyearweek"))
         healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v2(isoyearweek, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"isoyearweek\")')
+      } else if (time_var_modified == "season") {
+        healing_options <- names(heal_time_csfmt_rts_data_v2("2020/2021", names(x), granularity_time="season"))
+        healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v2(season, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"season\")')
       } else if (time_var_modified == "date") {
         healing_options <- names(heal_time_csfmt_rts_data_v2(as.Date("2020-01-01"), names(x), granularity_time="date"))
         healing_function <- glue::glue('cstidy::heal_time_csfmt_rts_data_v2(date, c("{paste0(healing_options, collapse="\\",\\"")}"), granularity_time=\"date\")')
@@ -544,7 +568,7 @@ heal.csfmt_rts_data_v2 <- function(x, ...) {
     "date"
   )
   time_vars <- time_vars[time_vars %in% names(x)]
-  time_vars_to_loop_through <- time_vars[time_vars %in% c("isoyear","isoyearweek","date")]
+  time_vars_to_loop_through <- time_vars[time_vars %in% c("isoyear", "isoyearweek", "season", "date")]
   for(i in time_vars_to_loop_through){
     other_time_vars <- time_vars[time_vars != i]
     time_var_as_granularity_geo <- i
@@ -593,6 +617,18 @@ heal.csfmt_rts_data_v2 <- function(x, ...) {
       "isoquarter",
       "isoyearquarter",
       "season",
+      "seasonweek",
+      "calyear",
+      "calmonth",
+      "calyearmonth",
+      "date"
+    ),
+    "season" = c(
+      "isoyear",
+      "isoweek",
+      "isoyearweek",
+      "isoquarter",
+      "isoyearquarter",
       "seasonweek",
       "calyear",
       "calmonth",
@@ -734,6 +770,19 @@ assert_classes.csfmt_rts_data_v2 <- function(x, ...) {
 #' - isoquarter
 #' - isoyearquarter
 #' - season
+#' - seasonweek
+#' - calyear
+#' - calmonth
+#' - calyearmonth
+#' - date
+#'
+#' **season**:
+#' - granularity_time
+#' - isoyear
+#' - isoweek
+#' - isoyearweek
+#' - isoquarter
+#' - isoyearquarter
 #' - seasonweek
 #' - calyear
 #' - calmonth

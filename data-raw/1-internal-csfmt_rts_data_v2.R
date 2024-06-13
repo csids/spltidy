@@ -17,6 +17,25 @@ csfmt_rts_data_v2_date_to[, calmonth := cstime::date_to_calmonth_n(date)]
 csfmt_rts_data_v2_date_to[, calyearmonth := cstime::date_to_calyearmonth_c(date)]
 setkey(csfmt_rts_data_v2_date_to, date)
 
+# csfmt_rts_data_v2_season_to
+csfmt_rts_data_v2_season_to <- csfmt_rts_data_v2_date_to[
+  ,
+  .(
+    granularity_time = "season",
+    date = max(date)),
+  keyby=.(season)
+]
+csfmt_rts_data_v2_season_to[, isoyear := NA_integer_]
+csfmt_rts_data_v2_season_to[, isoweek := NA_integer_]
+csfmt_rts_data_v2_season_to[, isoyearweek := NA_character_]
+csfmt_rts_data_v2_season_to[, isoquarter := NA_integer_]
+csfmt_rts_data_v2_season_to[, isoyearquarter := NA_character_]
+csfmt_rts_data_v2_season_to[, seasonweek := NA_integer_]
+csfmt_rts_data_v2_season_to[, calyear := NA_integer_]
+csfmt_rts_data_v2_season_to[, calmonth := NA_integer_]
+csfmt_rts_data_v2_season_to[, calyearmonth := NA_character_]
+setkey(csfmt_rts_data_v2_season_to, season)
+
 # csfmt_rts_data_v2_isoyearweek_to
 csfmt_rts_data_v2_isoyearweek_to <- data.table(
   granularity_time = "isoyearweek",
@@ -59,6 +78,7 @@ env = new.env()
 if(file.exists("R/sysdata.rda")) load("R/sysdata.rda", envir = env)
 
 env$csfmt_rts_data_v2_date_to <- csfmt_rts_data_v2_date_to
+env$csfmt_rts_data_v2_season_to <- csfmt_rts_data_v2_season_to
 env$csfmt_rts_data_v2_isoyearweek_to <- csfmt_rts_data_v2_isoyearweek_to
 env$csfmt_rts_data_v2_isoyear_to <- csfmt_rts_data_v2_isoyear_to
 
